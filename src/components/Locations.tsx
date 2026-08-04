@@ -1,0 +1,52 @@
+import { branches } from "@/lib/data";
+import { IconPin } from "./icons";
+
+export default function Locations() {
+  return (
+    <section id="locations" className="py-12 sm:py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <span className="text-[11.5px] font-bold uppercase tracking-[0.14em] text-accent">Find Us</span>
+        <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">5 Locations Across Chennai</h2>
+        <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink-soft">
+          Walk in or book ahead &mdash; a clinic near you, every day of the week.
+        </p>
+
+        <div className="mt-5 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
+          <div className="overflow-hidden rounded-2xl border border-line shadow-soft">
+            <iframe
+              src="https://maps.google.com/maps?q=Anna%20Nagar%20Chennai&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              className="h-[220px] w-full border-0 lg:h-full lg:min-h-[360px]"
+              title="Synergy Healthcare & Wellness locations map"
+            />
+          </div>
+
+          <div className="mt-3.5 flex flex-col gap-2 lg:mt-0">
+            {branches.map((branch) => (
+              <div
+                key={branch.name}
+                className="flex items-center justify-between rounded-xl border border-line bg-cloud px-3.5 py-3 lg:px-5 lg:py-4"
+              >
+                <span className="text-[13.5px] font-bold text-navy lg:text-base">{branch.name}</span>
+                <div className="flex items-center gap-3.5 lg:gap-5">
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${branch.mapQuery}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11.5px] font-bold text-navy hover:text-accent"
+                  >
+                    <IconPin className="size-3.5" />
+                    Get Directions
+                  </a>
+                  <a href={`tel:${branch.phone}`} className="text-[11.5px] font-bold text-accent hover:text-accent-dark">
+                    Call &rarr;
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
