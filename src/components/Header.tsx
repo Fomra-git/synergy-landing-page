@@ -71,15 +71,15 @@ export default function Header() {
         </div>
       </nav>
 
-      <div className="no-scrollbar flex gap-2 overflow-x-auto border-t border-line px-4 py-1.5 sm:px-6 lg:justify-center lg:overflow-visible lg:px-8">
+      <div className="grid grid-cols-5 gap-1 border-t border-line px-2.5 py-1.5 sm:flex sm:justify-center sm:gap-2 sm:px-6 sm:py-2 lg:px-8">
         {branches.map((branch) => (
           <a
             key={branch.name}
             href="#locations"
-            className="flex shrink-0 items-center gap-1 rounded-full border border-line bg-cloud px-3 py-1.5 text-[12.5px] font-semibold text-navy transition-colors hover:border-accent hover:text-accent"
+            className="flex min-w-0 items-center justify-center gap-1 rounded-full border border-line bg-cloud px-1 py-1.5 text-navy transition-colors hover:border-accent hover:text-accent sm:px-3"
           >
-            <span className="opacity-60">📍</span>
-            {branch.name}
+            <span className="hidden opacity-60 sm:inline">📍</span>
+            <span className="truncate text-[10px] font-semibold sm:text-[12.5px]">{branch.name}</span>
           </a>
         ))}
       </div>
