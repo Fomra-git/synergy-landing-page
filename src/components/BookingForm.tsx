@@ -73,7 +73,7 @@ export default function BookingForm() {
     >
       <h3 className="text-center text-lg text-navy">Request Your Appointment</h3>
       <p className="mb-3 border-b border-line pb-3 text-center text-[11.5px] text-ink-soft">
-        Get a callback within 15 minutes
+        No Spam. Your details used only to confirm your slot.
       </p>
 
       <div className="mb-2">

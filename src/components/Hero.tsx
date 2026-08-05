@@ -12,10 +12,6 @@ export default function Hero() {
               Chennai&rsquo;s Most Trusted Physio Center
             </h1>
 
-            <p className="max-w-[280px] text-sm font-semibold text-white/90 sm:max-w-sm sm:text-base">
-              No Spam. Your details used only to confirm your slot.
-            </p>
-
             <div className="w-full max-w-[300px] rounded-2xl bg-white/95 p-4 shadow-lifted backdrop-blur-sm sm:max-w-xs sm:p-5">
               <p className="text-base font-extrabold text-accent sm:text-lg">
                 Trusted by 15,000+ Happy Patients
