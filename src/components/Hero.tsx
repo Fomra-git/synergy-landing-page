@@ -4,7 +4,7 @@ import BookingForm from "./BookingForm";
 export default function Hero() {
   return (
     <section id="top" className="bg-white lg:bg-linear-to-br lg:from-navy lg:via-blue lg:to-accent">
-      <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-6 lg:py-8">
+      <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-6 lg:py-4">
         {/* Gradient panel + overlay copy */}
         <div className="relative h-[320px] overflow-hidden bg-linear-to-br from-navy via-blue to-accent sm:h-[360px] lg:h-[440px] lg:bg-none">
           <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-3 px-5 py-5 text-center sm:gap-4 lg:px-10">

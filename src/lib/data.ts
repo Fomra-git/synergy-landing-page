@@ -53,20 +53,20 @@ export const treatments: Treatment[] = [
 
 export const differentiators = [
   {
-    title: "Personalised Plans",
-    body: "Every program is built around your body, your goals and your recovery timeline.",
+    title: "Evidence-Based Care",
+    body: "Every treatment plan is built on clinical expertise, thorough assessments, and proven rehabilitation protocols.",
   },
   {
-    title: "14+ Years Experience",
-    body: "Licensed physiotherapists trusted by 15,000+ patients across Chennai.",
+    title: "Senior-Led Treatment",
+    body: "Your recovery is guided by experienced doctors and supported by a skilled physiotherapy team for consistent outcomes.",
   },
   {
-    title: "Flexible Scheduling",
-    body: "Early morning, evening & weekend slots across 5 branches.",
+    title: "Personalised Recovery Plans",
+    body: "Every program is tailored to your condition, lifestyle, and recovery goals for long-term functional improvement.",
   },
   {
-    title: "Modern Equipment",
-    body: "Advanced electrotherapy, manual therapy & rehab tools, in-house.",
+    title: "Trusted by Patients",
+    body: "Recognised as one of Chennai's leading physiotherapy centres for quality care, patient trust, and lasting results.",
   },
 ];
 
