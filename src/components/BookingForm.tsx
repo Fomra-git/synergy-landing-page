@@ -12,15 +12,17 @@ const selectClasses = `${inputClasses} appearance-none pr-9`;
 function Select({
   id,
   name,
+  required,
   children,
 }: {
   id: string;
   name: string;
+  required?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div className="relative">
-      <select id={id} name={name} defaultValue="" className={selectClasses}>
+      <select id={id} name={name} required={required} defaultValue="" className={selectClasses}>
         {children}
       </select>
       <IconChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-soft" />
@@ -99,7 +101,16 @@ export default function BookingForm() {
           <label htmlFor="age" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
             Age
           </label>
-          <input id="age" name="age" type="number" placeholder="Age" min={1} max={110} className={inputClasses} />
+          <input
+            id="age"
+            name="age"
+            type="number"
+            placeholder="Age"
+            min={1}
+            max={110}
+            required
+            className={inputClasses}
+          />
         </div>
       </div>
 
@@ -107,7 +118,7 @@ export default function BookingForm() {
         <label htmlFor="pain" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
           Area of pain
         </label>
-        <Select id="pain" name="pain">
+        <Select id="pain" name="pain" required>
           <option value="">Select area</option>
           {painAreas.map((area) => (
             <option key={area}>{area}</option>
@@ -119,7 +130,7 @@ export default function BookingForm() {
         <label htmlFor="branch" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
           Preferred branch
         </label>
-        <Select id="branch" name="branch">
+        <Select id="branch" name="branch" required>
           <option value="">Select branch</option>
           {branches.map((b) => (
             <option key={b.name}>{b.name}</option>
