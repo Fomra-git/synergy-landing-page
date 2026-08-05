@@ -1,6 +1,6 @@
-export const PHONE_DISPLAY = "+91 90000 00000";
-export const PHONE_TEL = "+919000000000";
-export const WHATSAPP_URL = "https://wa.me/919000000000";
+export const PHONE_DISPLAY = "+91 95660 07190";
+export const PHONE_TEL = "+919566007190";
+export const WHATSAPP_URL = "https://wa.me/919600148991";
 
 export type Branch = {
   name: string;
@@ -11,27 +11,27 @@ export type Branch = {
 export const branches: Branch[] = [
   {
     name: "Anna Nagar",
-    phone: "+919000000001",
+    phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Anna+Nagar+Chennai",
   },
   {
     name: "T Nagar",
-    phone: "+919000000002",
+    phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+T+Nagar+Chennai",
   },
   {
     name: "Adyar",
-    phone: "+919000000003",
+    phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Adyar+Chennai",
   },
   {
     name: "Mogappair",
-    phone: "+919000000004",
+    phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Mogappair+Chennai",
   },
   {
     name: "Vepery",
-    phone: "+919000000005",
+    phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Vepery+Chennai",
   },
 ];
