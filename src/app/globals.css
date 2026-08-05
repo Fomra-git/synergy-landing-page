@@ -55,12 +55,14 @@ body {
   background: #ffffff;
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
-  letter-spacing: -0.01em;
-  color: var(--color-navy);
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    color: var(--color-navy);
+  }
 }
 
 /* Hide scrollbar for horizontal snap carousels while keeping scroll */
