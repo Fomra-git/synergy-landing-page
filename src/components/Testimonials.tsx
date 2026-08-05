@@ -6,7 +6,7 @@ export default function Testimonials() {
     <section id="testimonials" className="bg-cloud py-10 sm:py-14 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <span className="text-[11.5px] font-bold uppercase tracking-[0.14em] text-accent">Real Results</span>
-        <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">What Our Patients Say</h2>
+        <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">Hear It From Our Patients</h2>
 
         <div className="mt-5 grid gap-6 lg:mt-8 lg:grid-cols-[1.1fr_1.4fr] lg:items-center lg:gap-10">
           <div className="relative flex aspect-video items-center justify-center overflow-hidden rounded-[18px] bg-linear-to-br from-navy to-blue shadow-lifted lg:aspect-[4/3.2]">
