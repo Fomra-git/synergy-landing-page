@@ -3,10 +3,10 @@ import BookingForm from "./BookingForm";
 
 export default function Hero() {
   return (
-    <section id="top" className="bg-white">
+    <section id="top" className="bg-white lg:bg-linear-to-br lg:from-navy lg:via-blue lg:to-accent">
       <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-6 lg:py-8">
         {/* Gradient panel + overlay copy */}
-        <div className="relative h-[320px] overflow-hidden bg-linear-to-br from-navy via-blue to-accent sm:h-[360px] lg:h-[440px] lg:rounded-[28px]">
+        <div className="relative h-[320px] overflow-hidden bg-linear-to-br from-navy via-blue to-accent sm:h-[360px] lg:h-[440px] lg:bg-none">
           <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-3 px-5 py-5 text-center sm:gap-4 lg:px-10">
             <h1 className="max-w-xs text-[26px] font-extrabold leading-tight text-white sm:max-w-sm sm:text-4xl lg:max-w-md lg:text-[44px]">
               Chennai&rsquo;s Most Trusted Physio Center
