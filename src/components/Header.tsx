@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { branches, navLinks } from "@/lib/data";
-import { IconMenu, IconClose } from "./icons";
+import { IconMenu, IconClose, IconPin } from "./icons";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -71,15 +71,15 @@ export default function Header() {
         </div>
       </nav>
 
-      <div className="grid grid-cols-5 gap-1 border-t border-line px-2.5 py-1.5 sm:flex sm:justify-center sm:gap-2 sm:px-6 sm:py-2 lg:px-8">
+      <div className="grid grid-cols-5 gap-1 border-t border-line px-2 py-1.5 sm:flex sm:justify-center sm:gap-2 sm:px-6 sm:py-2 lg:px-8">
         {branches.map((branch) => (
           <a
             key={branch.name}
             href="#locations"
-            className="flex min-w-0 items-center justify-center gap-1 rounded-full border border-line bg-cloud px-1 py-1.5 text-navy transition-colors hover:border-accent hover:text-accent sm:px-3"
+            className="flex min-w-0 items-center justify-center gap-0.5 rounded-full border border-line bg-cloud px-0.5 py-1.5 text-navy transition-colors hover:border-accent hover:text-accent sm:gap-1 sm:px-3"
           >
-            <span className="hidden opacity-60 sm:inline">📍</span>
-            <span className="truncate text-[10px] font-semibold sm:text-[12.5px]">{branch.name}</span>
+            <IconPin className="size-2.5 shrink-0 opacity-60 sm:size-3.5" />
+            <span className="truncate text-[9.5px] font-semibold sm:text-[12.5px]">{branch.name}</span>
           </a>
         ))}
       </div>
