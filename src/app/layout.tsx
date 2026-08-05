@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import { BookingModalProvider } from "@/context/BookingModalContext";
+import BookingModal from "@/components/BookingModal";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -30,7 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <body className="font-sans text-ink antialiased pb-16 lg:pb-0">
-        {children}
+        <BookingModalProvider>
+          {children}
+          <BookingModal />
+        </BookingModalProvider>
       </body>
     </html>
   );

@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { branches, navLinks } from "@/lib/data";
+import { useBookingModal } from "@/context/BookingModalContext";
 import { IconMenu, IconClose, IconPin } from "./icons";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { open: openBooking } = useBookingModal();
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
@@ -35,12 +37,13 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#bookForm"
+          <button
+            type="button"
+            onClick={openBooking}
             className="rounded-xl bg-accent px-3 py-2.5 text-xs font-bold text-white shadow-soft transition-colors hover:bg-accent-dark sm:px-4 sm:text-sm"
           >
             Book Appointment
-          </a>
+          </button>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}

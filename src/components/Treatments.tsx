@@ -1,7 +1,12 @@
+"use client";
+
 import { treatments } from "@/lib/data";
+import { useBookingModal } from "@/context/BookingModalContext";
 import { IconTreatment } from "./icons";
 
 export default function Treatments() {
+  const { open: openBooking } = useBookingModal();
+
   return (
     <section id="treatments" className="bg-cloud py-10 sm:py-14 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -34,12 +39,13 @@ export default function Treatments() {
       </div>
 
       <div className="mt-4 text-center lg:mt-8">
-        <a
-          href="#bookForm"
+        <button
+          type="button"
+          onClick={openBooking}
           className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3.5 text-[15px] font-bold text-white shadow-[0_8px_20px_-6px_rgba(14,107,224,0.45)] transition-colors hover:bg-accent-dark"
         >
           Book Appointment
-        </a>
+        </button>
       </div>
     </section>
   );

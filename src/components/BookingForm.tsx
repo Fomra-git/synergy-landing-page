@@ -43,10 +43,7 @@ export default function BookingForm() {
 
   if (submitted) {
     return (
-      <div
-        id="bookForm"
-        className="rounded-[20px] border border-line bg-white p-8 text-center shadow-lifted"
-      >
+      <div className="rounded-[20px] border border-line bg-white p-8 text-center shadow-lifted">
         <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-accent/10 text-2xl">
           ✅
         </div>
@@ -67,7 +64,6 @@ export default function BookingForm() {
 
   return (
     <form
-      id="bookForm"
       onSubmit={handleSubmit}
       className="rounded-[20px] border border-line bg-white p-4 pb-3.5 shadow-lifted sm:p-6"
     >

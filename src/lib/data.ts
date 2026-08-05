@@ -70,24 +70,58 @@ export const differentiators = [
   },
 ];
 
-export const reviews = [
+export type ReviewPart = {
+  text: string;
+  highlight?: boolean;
+};
+
+export type Review = {
+  initial: string;
+  name: string;
+  time: string;
+  parts: ReviewPart[];
+};
+
+export const reviews: Review[] = [
   {
     initial: "A",
     name: "Azeez Olymp",
     time: "10 months ago",
-    text: "I visited this physiotherapy clinic for severe heel pain that made walking difficult. The team carefully assessed the issue, explained the cause, and started a treatment plan right away. With their expert hands on therapy and simple home exercises, the pain eased within a few sessions and I'm back to normal activities much faster than I imagined. Professional, friendly, and highly effective truly the best place for heel pain relief!",
+    parts: [
+      { text: "I visited this physiotherapy clinic for " },
+      { text: "severe heel pain", highlight: true },
+      { text: " that made " },
+      { text: "walking difficult", highlight: true },
+      {
+        text: ". With their expert hands-on therapy and simple home exercises, the pain eased within a few sessions. ",
+      },
+      { text: "Professional, friendly, and highly effective", highlight: true },
+      { text: " — truly the best place for heel pain relief!" },
+    ],
   },
   {
     initial: "R",
     name: "Ravikumar S",
     time: "10 months ago",
-    text: "I came with lower back issues and sciatica problems. Dr. Suresh addressed the issues and advised the right type of exercises through (PT) Dr. Sai Venkatesh. My physio Dr. Sai Venkatesh has made me feel comfortable during the sessions and was sincere to his profession. At the end of my 10 days session, the calf and thigh pain have reduced to a great extent. I would strongly recommend Synergy Health care & Wellness to my friends and relatives for their spine and knee related problems.",
+    parts: [
+      {
+        text: "I came with lower back issues and sciatica problems. Dr. Suresh and my physio Dr. Sai Venkatesh made me feel comfortable throughout, and within 10 days my calf and thigh pain reduced to a great extent. I'd strongly recommend Synergy Health care & Wellness for their ",
+      },
+      { text: "spine and knee related problems", highlight: true },
+      { text: "." },
+    ],
   },
   {
     initial: "R",
     name: "raja antony",
     time: "4 months ago",
-    text: "I had a great experience at Synergy Physio Clinic. They are very professional, incredibly friendly and patient. I visited here for the hip and back related issues and thanks to the treatment and guidance it has been healed.",
+    parts: [
+      {
+        text: "I had a great experience at Synergy Physio Clinic. They are very professional, incredibly friendly and patient. I visited here for the ",
+      },
+      { text: "hip and back related issues", highlight: true },
+      { text: " and thanks to the treatment and guidance it has been healed." },
+    ],
   },
 ];
 
