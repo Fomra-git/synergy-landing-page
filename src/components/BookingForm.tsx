@@ -137,9 +137,6 @@ export default function BookingForm() {
       >
         Confirm My Appointment
       </button>
-      <p className="mt-2.5 text-center text-[11px] text-ink-soft">
-        No spam. Your details are used only to confirm your slot.
-      </p>
     </form>
   );
 }

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { IconGoogle, IconStar } from "./icons";
 import BookingForm from "./BookingForm";
 
@@ -6,22 +5,16 @@ export default function Hero() {
   return (
     <section id="top" className="bg-white">
       <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-8 lg:py-14">
-        {/* Media + overlay copy */}
-        <div className="relative h-[440px] overflow-hidden sm:h-[500px] lg:h-[620px] lg:rounded-[28px]">
-          <Image
-            src="/images/hero-physio.jpeg"
-            alt="Synergy physiotherapist treating a patient's back"
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover object-[50%_25%]"
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-[#0a1a28]/25 via-[#0a1a28]/45 to-[#091826]/95" />
-
-          <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-5 px-5 text-center sm:gap-6 lg:px-10">
+        {/* Gradient panel + overlay copy */}
+        <div className="relative h-[400px] overflow-hidden bg-linear-to-br from-navy via-blue to-accent sm:h-[460px] lg:h-[560px] lg:rounded-[28px]">
+          <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-4 px-5 py-6 text-center sm:gap-5 lg:px-10">
             <h1 className="max-w-xs text-[26px] font-extrabold leading-tight text-white sm:max-w-sm sm:text-4xl lg:max-w-md lg:text-[44px]">
               Chennai&rsquo;s Most Trusted Physio Center
             </h1>
+
+            <p className="max-w-[280px] text-sm font-semibold text-white/90 sm:max-w-sm sm:text-base">
+              No Spam. Your details used only to confirm your slot.
+            </p>
 
             <div className="w-full max-w-[300px] rounded-2xl bg-white/95 p-4 shadow-lifted backdrop-blur-sm sm:max-w-xs sm:p-5">
               <p className="text-base font-extrabold text-accent sm:text-lg">
@@ -56,7 +49,7 @@ export default function Hero() {
         </div>
 
         {/* Form, floated up over the hero */}
-        <div className="relative z-10 mx-auto -mt-10 w-full max-w-[520px] px-4 sm:px-6 sm:-mt-14 lg:mt-0 lg:max-w-none lg:px-0">
+        <div className="relative z-10 mx-auto -mt-6 w-full max-w-[520px] px-4 sm:px-6 sm:-mt-8 lg:mt-0 lg:max-w-none lg:px-0">
           <BookingForm />
         </div>
       </div>
