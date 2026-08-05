@@ -90,25 +90,23 @@ export default function Testimonials() {
             style={{ transform: `translateX(-${reviewIndex * (100 / REVIEWS_VISIBLE)}%)` }}
           >
             {reviews.map((r) => (
-              <div key={r.name} className="w-1/2 shrink-0 px-1.5 sm:px-2">
-                <div className="flex h-72 flex-col rounded-2xl border border-line bg-white p-3.5 shadow-soft sm:h-64 lg:h-56">
+              <div key={r.name} className="flex w-1/2 shrink-0 px-1.5 sm:px-2">
+                <div className="flex w-full flex-col rounded-2xl border border-line bg-white p-3.5 shadow-soft">
                   <div className="mb-2 flex items-center gap-2.5">
                     <div className="flex size-8.5 shrink-0 items-center justify-center rounded-full bg-cloud text-[13px] font-extrabold text-navy">
                       {r.initial}
                     </div>
                     <div>
                       <div className="text-[13px] font-bold text-navy">{r.name}</div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="flex gap-0.5 text-[#F2A600]">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <IconStar key={i} className="size-2.5 fill-[#F2A600] stroke-[#F2A600]" />
-                          ))}
-                        </div>
-                        <span className="text-[10.5px] text-ink-soft">{r.time}</span>
+                      <div className="flex gap-0.5 text-[#F2A600]">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <IconStar key={i} className="size-2.5 fill-[#F2A600] stroke-[#F2A600]" />
+                        ))}
                       </div>
+                      <span className="block text-[10.5px] text-ink-soft">{r.time}</span>
                     </div>
                   </div>
-                  <p className="line-clamp-6 text-[11px] leading-relaxed text-ink-soft sm:text-[12.5px]">
+                  <p className="text-[11px] leading-relaxed text-ink-soft sm:text-[12.5px]">
                     {r.parts.map((part, i) =>
                       part.highlight ? (
                         <span key={i} className="underline decoration-red-500 decoration-2 underline-offset-2">
