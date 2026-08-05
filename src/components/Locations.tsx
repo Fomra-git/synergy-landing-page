@@ -1,7 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import { branches } from "@/lib/data";
 import { IconPin } from "./icons";
 
 export default function Locations() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeBranch = branches[activeIndex];
+
   return (
     <section id="locations" className="py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -14,18 +20,33 @@ export default function Locations() {
         <div className="mt-5 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="overflow-hidden rounded-2xl border border-line shadow-soft">
             <iframe
-              src="https://maps.google.com/maps?q=Anna%20Nagar%20Chennai&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              key={activeBranch.name}
+              src={`https://maps.google.com/maps?q=${activeBranch.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
               loading="lazy"
               className="h-[220px] w-full border-0 lg:h-full lg:min-h-[360px]"
-              title="Synergy Healthcare & Wellness locations map"
+              title={`Synergy Healthcare & Wellness — ${activeBranch.name} map`}
             />
           </div>
 
           <div className="mt-3.5 flex flex-col gap-2 lg:mt-0">
-            {branches.map((branch) => (
+            {branches.map((branch, i) => (
               <div
                 key={branch.name}
-                className="flex items-center justify-between rounded-xl border border-line bg-cloud px-3.5 py-3 lg:px-5 lg:py-4"
+                role="button"
+                tabIndex={0}
+                onClick={() => setActiveIndex(i)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActiveIndex(i);
+                  }
+                }}
+                aria-pressed={i === activeIndex}
+                className={`flex cursor-pointer items-center justify-between rounded-xl border px-3.5 py-3 transition-colors lg:px-5 lg:py-4 ${
+                  i === activeIndex
+                    ? "border-accent bg-accent/5"
+                    : "border-line bg-cloud hover:border-accent/40"
+                }`}
               >
                 <span className="text-[13.5px] font-bold text-navy lg:text-base">{branch.name}</span>
                 <div className="flex items-center gap-3.5 lg:gap-5">
@@ -33,12 +54,17 @@ export default function Locations() {
                     href={`https://www.google.com/maps/search/?api=1&query=${branch.mapQuery}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-1 text-[11.5px] font-bold text-navy hover:text-accent"
                   >
                     <IconPin className="size-3.5" />
                     Get Directions
                   </a>
-                  <a href={`tel:${branch.phone}`} className="text-[11.5px] font-bold text-accent hover:text-accent-dark">
+                  <a
+                    href={`tel:${branch.phone}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-[11.5px] font-bold text-accent hover:text-accent-dark"
+                  >
                     Call &rarr;
                   </a>
                 </div>
