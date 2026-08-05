@@ -6,14 +6,14 @@ import { reviews, videoStories } from "@/lib/data";
 import { IconClose, IconPlay, IconStar } from "./icons";
 
 const SLIDE_INTERVAL_MS = 4000;
-const REVIEWS_VISIBLE = 2;
 
 export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
+  const [reviewsVisible, setReviewsVisible] = useState(2);
   const activeStory = videoStories.find((v) => v.youtubeId === activeVideo);
-  const maxReviewIndex = Math.max(0, reviews.length - REVIEWS_VISIBLE);
+  const maxReviewIndex = Math.max(0, reviews.length - reviewsVisible);
 
   useEffect(() => {
     if (activeVideo) return;
@@ -22,6 +22,17 @@ export default function Testimonials() {
     }, SLIDE_INTERVAL_MS);
     return () => clearInterval(timer);
   }, [activeVideo]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    const update = () => {
+      setReviewsVisible(mq.matches ? 2 : 1);
+      setReviewIndex(0);
+    };
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -87,10 +98,10 @@ export default function Testimonials() {
         <div className="mx-auto mt-5 w-full overflow-hidden sm:max-w-xl lg:mt-8 lg:max-w-3xl">
           <div
             className="flex transition-transform duration-500 ease-out"
-            style={{ transform: `translateX(-${reviewIndex * (100 / REVIEWS_VISIBLE)}%)` }}
+            style={{ transform: `translateX(-${reviewIndex * (100 / reviewsVisible)}%)` }}
           >
             {reviews.map((r) => (
-              <div key={r.name} className="flex w-1/2 shrink-0 px-1.5 sm:px-2">
+              <div key={r.name} className="flex w-full shrink-0 px-1.5 sm:w-1/2 sm:px-2">
                 <div className="flex w-full flex-col rounded-2xl border border-line bg-white p-3.5 shadow-soft">
                   <div className="mb-2 flex items-center gap-2.5">
                     <div className="flex size-8.5 shrink-0 items-center justify-center rounded-full bg-cloud text-[13px] font-extrabold text-navy">
