@@ -82,47 +82,6 @@ export function IconChevronDown({ className }: IconProps) {
   );
 }
 
-const treatmentPaths: Record<string, React.ReactNode> = {
-  ligament: <path d="M8 3v6l-3 3v9h4v-6h6v6h4v-9l-3-3V3" strokeLinejoin="round" strokeLinecap="round" />,
-  neck: (
-    <>
-      <circle cx="12" cy="5" r="2.4" />
-      <path d="M12 7.4V13m0 0l-4 8m4-8l4 8" strokeLinecap="round" />
-    </>
-  ),
-  shoulder: (
-    <>
-      <circle cx="9" cy="5" r="2.2" />
-      <path d="M9 7.2v6l6 3v6M9 13l-4 3v5" strokeLinecap="round" strokeLinejoin="round" />
-    </>
-  ),
-  elbow: <path d="M6 4l3 7-2 9M6 4h5l4 6-3 10" strokeLinecap="round" strokeLinejoin="round" />,
-  sports: (
-    <>
-      <circle cx="15" cy="4.5" r="2" />
-      <path d="M15 6.5l-2 4-5 1 1 3 5-1 2 3-2 5m-6-6l3-1" strokeLinecap="round" strokeLinejoin="round" />
-    </>
-  ),
-  prenatal: (
-    <>
-      <circle cx="12" cy="5" r="2.2" />
-      <path
-        d="M12 7.2c-3 0-4 3-4 5s1 3 1 3-2 5-2 7h4l1-5 1 5h4c0-2-2-7-2-7s1-1 1-3-1-5-4-5z"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </>
-  ),
-};
-
-export function IconTreatment({ name, className }: { name: keyof typeof treatmentPaths; className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} className={className}>
-      {treatmentPaths[name]}
-    </svg>
-  );
-}
-
 export function IconHeart({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinejoin="round" className={className}>

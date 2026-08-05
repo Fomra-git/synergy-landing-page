@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { treatments } from "@/lib/data";
 import { useBookingModal } from "@/context/BookingModalContext";
-import { IconTreatment } from "./icons";
 
 export default function Treatments() {
   const { open: openBooking } = useBookingModal();
@@ -21,13 +21,20 @@ export default function Treatments() {
         {treatments.map((t) => (
           <div
             key={t.title}
-            className="w-[150px] shrink-0 overflow-hidden rounded-2xl border border-line bg-white shadow-soft transition-transform hover:-translate-y-1 hover:shadow-lifted lg:w-auto"
+            className="relative w-[190px] shrink-0 transition-transform hover:-translate-y-1 lg:w-auto"
           >
-            <div className={`relative flex h-27 items-center justify-center bg-linear-to-br ${t.gradient}`}>
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.35),transparent_55%)]" />
-              <IconTreatment name={t.icon} className="relative z-10 size-10 stroke-white" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line shadow-soft">
+              <Image
+                src={t.image}
+                alt={t.title}
+                fill
+                sizes="(min-width: 1024px) 16vw, 190px"
+                className="object-cover"
+              />
             </div>
-            <h4 className="px-3 py-3.5 text-[13px] font-bold leading-snug text-navy">{t.title}</h4>
+            <div className="absolute inset-x-2.5 bottom-2.5 rounded-xl bg-white/95 px-2.5 py-2 text-center shadow-[0_4px_14px_rgba(18,49,75,0.18)] backdrop-blur-sm">
+              <span className="text-[12.5px] font-bold leading-snug text-navy">{t.title}</span>
+            </div>
           </div>
         ))}
       </div>

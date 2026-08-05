@@ -38,17 +38,16 @@ export const branches: Branch[] = [
 
 export type Treatment = {
   title: string;
-  gradient: string;
-  icon: "ligament" | "neck" | "shoulder" | "elbow" | "sports" | "prenatal";
+  image: string;
 };
 
 export const treatments: Treatment[] = [
-  { title: "Ligament Injury Rehab", gradient: "from-[#3D6D9B] to-[#12314B]", icon: "ligament" },
-  { title: "Neck Pain Rehab", gradient: "from-[#0E6BE0] to-[#12314B]", icon: "neck" },
-  { title: "Shoulder Pain Rehab", gradient: "from-[#93A8B8] to-[#3D6D9B]", icon: "shoulder" },
-  { title: "Elbow Pain Rehab", gradient: "from-[#12314B] to-[#3D6D9B]", icon: "elbow" },
-  { title: "Sports Injury Rehab", gradient: "from-[#0E6BE0] to-[#3D6D9B]", icon: "sports" },
-  { title: "Prenatal & Postnatal Care", gradient: "from-[#3D6D9B] to-[#93A8B8]", icon: "prenatal" },
+  { title: "Ligament Injury Rehabilitation", image: "/images/treatments/ligament.jpg" },
+  { title: "Neck Pain Rehabilitation", image: "/images/treatments/neck.jpg" },
+  { title: "Shoulder Pain Rehabilitation", image: "/images/treatments/shoulder.jpg" },
+  { title: "Elbow Pain Rehabilitation", image: "/images/treatments/elbow.jpg" },
+  { title: "Sports Injury Rehabilitation", image: "/images/treatments/sports.jpg" },
+  { title: "Prenatal & Postnatal Care", image: "/images/treatments/prenatal.jpg" },
 ];
 
 export const differentiators = [
