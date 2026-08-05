@@ -44,7 +44,7 @@ export default function Testimonials() {
                   alt={video.caption}
                   fill
                   sizes="(min-width: 1024px) 384px, 280px"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="origin-top scale-[1.7] object-cover transition-transform duration-300 group-hover:scale-[1.8]"
                 />
                 <span className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent" />
                 <span className="absolute inset-x-0 bottom-0 flex items-center gap-2 p-3">
