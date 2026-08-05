@@ -10,6 +10,7 @@ const SLIDE_INTERVAL_MS = 4000;
 export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [reviewIndex, setReviewIndex] = useState(0);
   const activeStory = videoStories.find((v) => v.youtubeId === activeVideo);
 
   useEffect(() => {
@@ -19,6 +20,13 @@ export default function Testimonials() {
     }, SLIDE_INTERVAL_MS);
     return () => clearInterval(timer);
   }, [activeVideo]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setReviewIndex((i) => (i + 1) % reviews.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section id="testimonials" className="bg-cloud py-10 sm:py-14 lg:py-20">
@@ -74,27 +82,49 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div className="no-scrollbar mt-5 flex gap-3 overflow-x-auto pb-1 lg:mt-8 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible">
-          {reviews.map((r) => (
-            <div
-              key={r.name}
-              className="w-[250px] shrink-0 rounded-2xl border border-line bg-white p-3.5 shadow-soft lg:w-auto"
-            >
-              <div className="mb-2 flex items-center gap-2.5">
-                <div className="flex size-8.5 items-center justify-center rounded-full bg-cloud text-[13px] font-extrabold text-navy">
-                  {r.initial}
-                </div>
-                <div>
-                  <div className="text-[13px] font-bold text-navy">{r.name}</div>
-                  <div className="flex gap-0.5 text-[#F2A600]">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <IconStar key={i} className="size-2.5 fill-[#F2A600] stroke-[#F2A600]" />
-                    ))}
+        <div className="mx-auto mt-5 w-full max-w-[280px] overflow-hidden sm:max-w-xs lg:mt-8 lg:max-w-md">
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${reviewIndex * 100}%)` }}
+          >
+            {reviews.map((r) => (
+              <div
+                key={r.name}
+                className="flex h-64 w-full shrink-0 flex-col rounded-2xl border border-line bg-white p-3.5 shadow-soft sm:h-56"
+              >
+                <div className="mb-2 flex items-center gap-2.5">
+                  <div className="flex size-8.5 shrink-0 items-center justify-center rounded-full bg-cloud text-[13px] font-extrabold text-navy">
+                    {r.initial}
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-bold text-navy">{r.name}</div>
+                    <div className="flex items-center gap-1.5">
+                      <div className="flex gap-0.5 text-[#F2A600]">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <IconStar key={i} className="size-2.5 fill-[#F2A600] stroke-[#F2A600]" />
+                        ))}
+                      </div>
+                      <span className="text-[10.5px] text-ink-soft">{r.time}</span>
+                    </div>
                   </div>
                 </div>
+                <p className="line-clamp-6 text-[12.5px] leading-relaxed text-ink-soft">{r.text}</p>
               </div>
-              <p className="text-[12.5px] leading-relaxed text-ink-soft">{r.text}</p>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-3 flex justify-center gap-1.5">
+          {reviews.map((r, i) => (
+            <button
+              key={r.name}
+              type="button"
+              onClick={() => setReviewIndex(i)}
+              aria-label={`Go to review ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all ${
+                i === reviewIndex ? "w-5 bg-accent" : "w-1.5 bg-line"
+              }`}
+            />
           ))}
         </div>
       </div>

@@ -72,19 +72,22 @@ export const differentiators = [
 
 export const reviews = [
   {
-    initial: "P",
-    name: "Priya S.",
-    text: "Walked in barely able to lift my arm after surgery — three months on I'm back to my morning walks pain-free.",
-  },
-  {
-    initial: "K",
-    name: "Karthik R.",
-    text: "Best physio clinic in Anna Nagar. The team explains every step and the results speak for themselves.",
-  },
-  {
     initial: "A",
-    name: "Anitha M.",
-    text: "Post-pregnancy back pain is finally gone. Grateful for how patient and thorough the therapists were.",
+    name: "Azeez Olymp",
+    time: "10 months ago",
+    text: "I visited this physiotherapy clinic for severe heel pain that made walking difficult. The team carefully assessed the issue, explained the cause, and started a treatment plan right away. With their expert hands on therapy and simple home exercises, the pain eased within a few sessions and I'm back to normal activities much faster than I imagined. Professional, friendly, and highly effective truly the best place for heel pain relief!",
+  },
+  {
+    initial: "R",
+    name: "Ravikumar S",
+    time: "10 months ago",
+    text: "I came with lower back issues and sciatica problems. Dr. Suresh addressed the issues and advised the right type of exercises through (PT) Dr. Sai Venkatesh. My physio Dr. Sai Venkatesh has made me feel comfortable during the sessions and was sincere to his profession. At the end of my 10 days session, the calf and thigh pain have reduced to a great extent. I would strongly recommend Synergy Health care & Wellness to my friends and relatives for their spine and knee related problems.",
+  },
+  {
+    initial: "R",
+    name: "raja antony",
+    time: "4 months ago",
+    text: "I had a great experience at Synergy Physio Clinic. They are very professional, incredibly friendly and patient. I visited here for the hip and back related issues and thanks to the treatment and guidance it has been healed.",
   },
 ];
 
