@@ -5,7 +5,6 @@ import WhySynergy from "@/components/WhySynergy";
 import Testimonials from "@/components/Testimonials";
 import Locations from "@/components/Locations";
 import HowItWorks from "@/components/HowItWorks";
-import Team from "@/components/Team";
 import Footer from "@/components/Footer";
 import StickyCta from "@/components/StickyCta";
 
@@ -20,7 +19,6 @@ export default function Home() {
         <Testimonials />
         <Locations />
         <HowItWorks />
-        <Team />
       </main>
       <Footer />
       <StickyCta />

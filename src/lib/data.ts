@@ -107,13 +107,6 @@ export const steps = [
   },
 ];
 
-export const team = [
-  { initials: "DR", name: "Dr. Rakesh Iyer", role: "Lead Physiotherapist, MPT Ortho" },
-  { initials: "DS", name: "Dr. Sandhya Nair", role: "Sports Rehab Specialist" },
-  { initials: "DV", name: "Dr. Vikram Das", role: "Spine & Neuro Rehab" },
-  { initials: "DM", name: "Dr. Meera Krishnan", role: "Prenatal & Postnatal Care" },
-];
-
 export const painAreas = [
   "Neck",
   "Shoulder",

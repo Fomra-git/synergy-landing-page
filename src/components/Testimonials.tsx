@@ -1,13 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { reviews, videoStories } from "@/lib/data";
 import { IconClose, IconPlay, IconStar } from "./icons";
 
+const SLIDE_INTERVAL_MS = 4000;
+
 export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [slideIndex, setSlideIndex] = useState(0);
   const activeStory = videoStories.find((v) => v.youtubeId === activeVideo);
+
+  useEffect(() => {
+    if (activeVideo) return;
+    const timer = setInterval(() => {
+      setSlideIndex((i) => (i + 1) % videoStories.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [activeVideo]);
 
   return (
     <section id="testimonials" className="bg-cloud py-10 sm:py-14 lg:py-20">
@@ -15,32 +26,51 @@ export default function Testimonials() {
         <span className="text-[11.5px] font-bold uppercase tracking-[0.14em] text-accent">Real Results</span>
         <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">Hear It From Our Patients</h2>
 
-        <div className="no-scrollbar mt-5 flex gap-3 overflow-x-auto pb-1 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible">
-          {videoStories.map((video) => (
+        <div className="mx-auto mt-5 w-full max-w-[280px] overflow-hidden rounded-2xl shadow-soft sm:max-w-xs lg:mt-8 lg:max-w-sm">
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${slideIndex * 100}%)` }}
+          >
+            {videoStories.map((video) => (
+              <button
+                key={video.youtubeId}
+                type="button"
+                onClick={() => setActiveVideo(video.youtubeId)}
+                aria-label={`Play video: ${video.caption}`}
+                className="group relative aspect-square w-full shrink-0 overflow-hidden bg-navy"
+              >
+                <Image
+                  src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                  alt={video.caption}
+                  fill
+                  sizes="(min-width: 1024px) 384px, 280px"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent" />
+                <span className="absolute inset-x-0 bottom-0 flex items-center gap-2 p-3">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white/95 shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-transform group-hover:scale-105">
+                    <IconPlay className="ml-0.5 size-3 fill-accent" />
+                  </span>
+                  <span className="line-clamp-2 text-left text-[12px] font-bold leading-tight text-white">
+                    {video.caption}
+                  </span>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-3 flex justify-center gap-1.5">
+          {videoStories.map((video, i) => (
             <button
               key={video.youtubeId}
               type="button"
-              onClick={() => setActiveVideo(video.youtubeId)}
-              aria-label={`Play video: ${video.caption}`}
-              className="group relative aspect-square w-[150px] shrink-0 overflow-hidden rounded-2xl bg-navy shadow-soft sm:w-[170px] lg:w-auto"
-            >
-              <Image
-                src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
-                alt={video.caption}
-                fill
-                sizes="(min-width: 1024px) 25vw, 170px"
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <span className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent" />
-              <span className="absolute inset-x-0 bottom-0 flex items-center gap-1.5 p-2.5">
-                <span className="flex size-5.5 shrink-0 items-center justify-center rounded-full bg-white/95 shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-transform group-hover:scale-105">
-                  <IconPlay className="ml-0.5 size-2.5 fill-accent" />
-                </span>
-                <span className="line-clamp-2 text-left text-[10px] font-bold leading-tight text-white">
-                  {video.caption}
-                </span>
-              </span>
-            </button>
+              onClick={() => setSlideIndex(i)}
+              aria-label={`Go to video ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all ${
+                i === slideIndex ? "w-5 bg-accent" : "w-1.5 bg-line"
+              }`}
+            />
           ))}
         </div>
 
