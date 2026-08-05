@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Treatments from "@/components/Treatments";
 import WhySynergy from "@/components/WhySynergy";
 import Testimonials from "@/components/Testimonials";
+import PatientStories from "@/components/PatientStories";
 import Locations from "@/components/Locations";
 import HowItWorks from "@/components/HowItWorks";
 import Team from "@/components/Team";
@@ -18,6 +19,7 @@ export default function Home() {
         <Treatments />
         <WhySynergy />
         <Testimonials />
+        <PatientStories />
         <Locations />
         <HowItWorks />
         <Team />

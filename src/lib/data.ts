@@ -125,6 +125,30 @@ export const painAreas = [
   "Other",
 ];
 
+export type VideoStory = {
+  youtubeId: string;
+  caption: string;
+};
+
+export const videoStories: VideoStory[] = [
+  {
+    youtubeId: "WEKLrNEhjhI",
+    caption: "Watch: Sanjith Kumar Recovery Story | Neck Sprain",
+  },
+  {
+    youtubeId: "zYWyTU4ejOY",
+    caption: "Watch Recovery Story of Meenu | Ligament Tear",
+  },
+  {
+    youtubeId: "IsF8ziZEMp0",
+    caption: "Watch Recovery Story of John | Prolonged Neck Pain",
+  },
+  {
+    youtubeId: "rcJZ5AhoGyE",
+    caption: "Watch Recovery Story of Asish",
+  },
+];
+
 export const navLinks = [
   { href: "#treatments", label: "Services" },
   { href: "#why", label: "Why Synergy" },
