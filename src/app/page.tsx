@@ -17,8 +17,8 @@ export default function Home() {
         <Treatments />
         <WhySynergy />
         <Testimonials />
-        <Locations />
         <HowItWorks />
+        <Locations />
       </main>
       <Footer />
       <StickyCta />

@@ -2,7 +2,7 @@ import { steps } from "@/lib/data";
 
 export default function HowItWorks() {
   return (
-    <section className="bg-cloud py-10 sm:py-14 lg:py-20">
+    <section className="bg-cloud py-7 sm:py-9 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <span className="text-[11.5px] font-bold uppercase tracking-[0.14em] text-accent">The Process</span>
         <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">How It Works</h2>

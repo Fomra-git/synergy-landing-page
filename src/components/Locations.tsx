@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { branches } from "@/lib/data";
 import { IconPin } from "./icons";
 
@@ -9,22 +10,24 @@ export default function Locations() {
   const activeBranch = branches[activeIndex];
 
   return (
-    <section id="locations" className="py-12 sm:py-16 lg:py-24">
+    <section id="locations" className="py-8 sm:py-10 lg:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <span className="text-[11.5px] font-bold uppercase tracking-[0.14em] text-accent">Find Us</span>
-        <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">5 Locations Across Chennai</h2>
+        <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">Locate us</h2>
         <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-ink-soft">
           Walk in or book ahead &mdash; a clinic near you, every day of the week.
         </p>
 
         <div className="mt-5 lg:mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
-          <div className="overflow-hidden rounded-2xl border border-line shadow-soft">
-            <iframe
+          <div className="relative h-[220px] w-full overflow-hidden rounded-2xl border border-line shadow-soft lg:h-full lg:min-h-[360px]">
+            <Image
               key={activeBranch.name}
-              src={`https://maps.google.com/maps?q=${activeBranch.mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
-              loading="lazy"
-              className="h-[220px] w-full border-0 lg:h-full lg:min-h-[360px]"
-              title={`Synergy Healthcare & Wellness — ${activeBranch.name} map`}
+              src={activeBranch.image}
+              alt={`Synergy Healthcare & Wellness — ${activeBranch.name}`}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+              priority
             />
           </div>
 
