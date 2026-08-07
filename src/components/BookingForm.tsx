@@ -5,7 +5,7 @@ import { branches, painAreas } from "@/lib/data";
 import { IconChevronDown } from "./icons";
 
 const inputClasses =
-  "w-full rounded-xl border-[1.5px] border-line bg-[#FBFDFE] px-3 py-2.5 text-sm text-ink placeholder:text-ink-soft/60 focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20";
+  "w-full rounded-xl border-[1.5px] border-line bg-[#FBFDFE] px-3 py-2 text-sm text-ink placeholder:text-ink-soft/60 focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20 sm:py-2.5";
 
 const selectClasses = `${inputClasses} appearance-none pr-9`;
 
@@ -33,14 +33,15 @@ function Select({
 export default function BookingForm() {
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const phone = (form.elements.namedItem("phone") as HTMLInputElement)?.value.trim();
-    if (!name.trim() || !phone) return;
+    if (!name.trim() || !phone.trim()) return;
     setSubmitted(true);
     form.reset();
+    setPhone("");
   }
 
   if (submitted) {
@@ -67,15 +68,15 @@ export default function BookingForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-[20px] border border-line bg-white p-4 pb-3.5 shadow-lifted sm:p-6"
+      className="rounded-[20px] border border-line bg-white p-3 pb-2.5 shadow-lifted sm:p-6"
     >
-      <h3 className="text-center text-lg text-navy">Request Your Appointment</h3>
-      <p className="mb-3 border-b border-line pb-3 text-center text-[11.5px] text-ink-soft">
+      <h3 className="text-center text-base text-navy sm:text-lg">Request Your Appointment</h3>
+      <p className="mb-1.5 border-b border-line pb-1.5 text-center text-[11.5px] text-ink-soft sm:mb-3 sm:pb-3">
         No Spam. Your details used only to confirm your slot.
       </p>
 
-      <div className="mb-2">
-        <label htmlFor="name" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
+      <div className="mb-1.5 sm:mb-2">
+        <label htmlFor="name" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
           Full name
         </label>
         <input
@@ -90,15 +91,27 @@ export default function BookingForm() {
         />
       </div>
 
-      <div className="mb-2 grid grid-cols-2 gap-2.5">
+      <div className="mb-1.5 grid grid-cols-2 gap-2.5 sm:mb-2">
         <div>
-          <label htmlFor="phone" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
+          <label htmlFor="phone" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
             Phone number
           </label>
-          <input id="phone" name="phone" type="tel" placeholder="98XXXXXXXX" required className={inputClasses} />
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            maxLength={10}
+            placeholder="98XXXXXXXX"
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+            className={inputClasses}
+          />
         </div>
         <div>
-          <label htmlFor="age" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
+          <label htmlFor="age" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
             Age
           </label>
           <input
@@ -114,8 +127,8 @@ export default function BookingForm() {
         </div>
       </div>
 
-      <div className="mb-2">
-        <label htmlFor="pain" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
+      <div className="mb-1.5 sm:mb-2">
+        <label htmlFor="pain" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
           Area of pain
         </label>
         <Select id="pain" name="pain" required>
@@ -126,8 +139,8 @@ export default function BookingForm() {
         </Select>
       </div>
 
-      <div className="mb-3">
-        <label htmlFor="branch" className="mb-1 block text-[11px] font-bold uppercase tracking-wide text-navy">
+      <div className="mb-2 sm:mb-3">
+        <label htmlFor="branch" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
           Preferred branch
         </label>
         <Select id="branch" name="branch" required>
@@ -140,7 +153,7 @@ export default function BookingForm() {
 
       <button
         type="submit"
-        className="w-full rounded-xl bg-accent px-5 py-3.5 text-[15px] font-bold text-white shadow-[0_8px_20px_-6px_rgba(14,107,224,0.45)] transition-transform hover:bg-accent-dark active:scale-[0.97]"
+        className="w-full rounded-xl bg-accent px-5 py-3 text-[15px] font-bold text-white shadow-[0_8px_20px_-6px_rgba(14,107,224,0.45)] transition-transform hover:bg-accent-dark active:scale-[0.97] sm:py-3.5"
       >
         Confirm My Appointment
       </button>
