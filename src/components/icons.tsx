@@ -36,6 +36,19 @@ export function IconPin({ className }: IconProps) {
   );
 }
 
+export function IconPushPin({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className}>
+      <g transform="rotate(15 12 12)">
+        <path d="M12.8 13.5h2.1l1.9 8.7-1.4 1.4-2.6-10.1z" fill="#54565c" />
+        <circle cx="11" cy="9" r="7" fill="#e33629" />
+        <path d="M11 2a7 7 0 0 1 0 14 7 7 0 0 0 0-14z" fill="#c22b20" />
+        <circle cx="8.7" cy="6.7" r="2.1" fill="#f28b82" />
+      </g>
+    </svg>
+  );
+}
+
 export function IconMenu({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" className={className}>
@@ -111,6 +124,61 @@ export function IconTools({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M3 12l4-8 4 6 3-4 7 6" />
+    </svg>
+  );
+}
+
+export function IconShieldCheck({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M12 2.5l7.5 3v5.3c0 4.7-3.2 8.8-7.5 10.2-4.3-1.4-7.5-5.5-7.5-10.2V5.5z" />
+      <path d="M8.7 12.2l2.2 2.2 4.4-4.4" />
+    </svg>
+  );
+}
+
+export function IconMail({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m22 6-10 7L2 6" />
+    </svg>
+  );
+}
+
+export function IconLink({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M9 17H7a5 5 0 0 1 0-10h2" />
+      <path d="M15 7h2a5 5 0 1 1 0 10h-2" />
+      <line x1="8" y1="12" x2="16" y2="12" />
+    </svg>
+  );
+}
+
+export function IconYoutube({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+      <path d="m10 15 5-3-5-3z" />
+    </svg>
+  );
+}
+
+export function IconFacebook({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.1l.9-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+export function IconInstagram({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
     </svg>
   );
 }
