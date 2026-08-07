@@ -1,11 +1,36 @@
 export const PHONE_DISPLAY = "+91 95660 07190";
 export const PHONE_TEL = "+919566007190";
 export const WHATSAPP_URL = "https://wa.me/919600148991";
+export const EMAIL = "synergyhealthcareandwellness@gmail.com";
+export const HEADQUARTERS_ADDRESS =
+  "Old no F76, Chintamani, 1st Floor, AG Block 2nd St, Annanagar East, Chennai, Tamil Nadu 600102";
+
+export const footerServices = [
+  "Back Pain Treatment & Rehabilitation",
+  "Neck Pain Treatment & Rehabilitation",
+  "Shoulder Pain Rehabilitation",
+  "Elbow Pain Rehabilitation",
+  "Knee Pain Treatment and Rehabilitation",
+  "Ligament Injury Rehabilitation",
+  "Sports Injury Treatment and Rehabilitation",
+  "Pre and Post Surgical Rehabilitation",
+  "Prenatal and Postnatal Care",
+  "Neurological Rehabilitation",
+  "Aged Care Physiotherapy",
+  "Manual Therapy",
+];
+
+export const socialLinks = [
+  { label: "YouTube", href: "#" },
+  { label: "Facebook", href: "#" },
+  { label: "Instagram", href: "#" },
+];
 
 export type Branch = {
   name: string;
   phone: string;
   mapQuery: string;
+  image: string;
 };
 
 export const branches: Branch[] = [
@@ -13,26 +38,31 @@ export const branches: Branch[] = [
     name: "Anna Nagar",
     phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Anna+Nagar+Chennai",
+    image: "/images/locations/anna-nagar.jpg",
   },
   {
     name: "T Nagar",
     phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+T+Nagar+Chennai",
+    image: "/images/locations/t-nagar.jpg",
   },
   {
     name: "Adyar",
     phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Adyar+Chennai",
+    image: "/images/locations/adyar.jpg",
   },
   {
     name: "Mogappair",
     phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Mogappair+Chennai",
+    image: "/images/locations/mogappair.jpg",
   },
   {
     name: "Vepery",
     phone: "+919566007190",
     mapQuery: "Synergy+Healthcare+Wellness+Vepery+Chennai",
+    image: "/images/locations/vepery.jpg",
   },
 ];
 
@@ -42,12 +72,18 @@ export type Treatment = {
 };
 
 export const treatments: Treatment[] = [
-  { title: "Ligament Injury Rehabilitation", image: "/images/treatments/ligament.jpg" },
-  { title: "Neck Pain Rehabilitation", image: "/images/treatments/neck.jpg" },
-  { title: "Shoulder Pain Rehabilitation", image: "/images/treatments/shoulder.jpg" },
-  { title: "Elbow Pain Rehabilitation", image: "/images/treatments/elbow.jpg" },
-  { title: "Sports Injury Rehabilitation", image: "/images/treatments/sports.jpg" },
-  { title: "Prenatal & Postnatal Care", image: "/images/treatments/prenatal.jpg" },
+  { title: "Prenatal & Postnatal Care", image: "/images/treatments/prenatal.webp" },
+  { title: "Neurological Rehabilitation", image: "/images/treatments/neurological.webp" },
+  { title: "Aged Care Physiotherapy", image: "/images/treatments/aged-care.webp" },
+  { title: "Manual Therapy", image: "/images/treatments/manual-therapy.webp" },
+  { title: "Back Pain Rehabilitation", image: "/images/treatments/back-pain.webp" },
+  { title: "Knee Pain Rehabilitation", image: "/images/treatments/knee-pain.webp" },
+  { title: "Pre & Post Surgical Rehabilitation", image: "/images/treatments/pre-post-surgical.webp" },
+  { title: "Ligament Injury Rehabilitation", image: "/images/treatments/ligament.webp" },
+  { title: "Neck Pain Rehabilitation", image: "/images/treatments/neck.webp" },
+  { title: "Shoulder Pain Rehabilitation", image: "/images/treatments/shoulder.webp" },
+  { title: "Elbow Pain Rehabilitation", image: "/images/treatments/elbow.webp" },
+  { title: "Sports Injury Rehabilitation", image: "/images/treatments/sports.webp" },
 ];
 
 export const differentiators = [
@@ -83,43 +119,130 @@ export type Review = {
 
 export const reviews: Review[] = [
   {
-    initial: "A",
-    name: "Azeez Olymp",
-    time: "10 months ago",
+    initial: "N",
+    name: "Naga Sai Teja",
+    time: "3 months ago",
     parts: [
-      { text: "I visited this physiotherapy clinic for " },
-      { text: "severe heel pain", highlight: true },
-      { text: " that made " },
-      { text: "walking difficult", highlight: true },
+      { text: "My experience with Synergy Physiotherapy & Rehabilitation clinic has been exceptional. Their " },
+      { text: "patient care is outstanding", highlight: true },
       {
-        text: ". With their expert hands-on therapy and simple home exercises, the pain eased within a few sessions. ",
+        text: ", and they clearly explain each procedure before implementation. Four months ago, I underwent ",
       },
-      { text: "Professional, friendly, and highly effective", highlight: true },
-      { text: " — truly the best place for heel pain relief!" },
+      { text: "ACL reconstruction surgery", highlight: true },
+      {
+        text: ", and my doctor prescribed six months of mandatory physiotherapy. Initially, I explored home visits from other clinics, but their approach and patient handling were unsatisfactory. Consequently, I sought treatment at Synergy. Dr. Navya and Anvitha thoroughly outlined the entire ",
+      },
+      { text: "recovery process", highlight: true },
+      { text: ", detailing how to regain full functionality. They " },
+      { text: "consistently monitor patient progress", highlight: true },
+      {
+        text: " and recommend specific exercises to facilitate optimal recovery. Following my sessions at Synergy, I ",
+      },
+      { text: "feel significantly more confident in walking", highlight: true },
+      { text: " and resuming my regular activities. I " },
+      { text: "am highly satisfied with my recovery progress.", highlight: true },
     ],
   },
   {
-    initial: "R",
-    name: "Ravikumar S",
-    time: "10 months ago",
+    initial: "S",
+    name: "Sharmila Devi",
+    time: "a month ago",
     parts: [
-      {
-        text: "I came with lower back issues and sciatica problems. Dr. Suresh and my physio Dr. Sai Venkatesh made me feel comfortable throughout, and within 10 days my calf and thigh pain reduced to a great extent. I'd strongly recommend Synergy Health care & Wellness for their ",
-      },
-      { text: "spine and knee related problems", highlight: true },
-      { text: "." },
+      { text: "Franklin sir spot the exact issue and " },
+      { text: "advised exact solution", highlight: true },
+      { text: ". Sripriya mam has provided " },
+      { text: "excellent service", highlight: true },
+      { text: ". I had " },
+      { text: "neck pain issues which is resolved now.", highlight: true },
+      { text: " Planning to proceed with fitness classes as individual attention is provided." },
     ],
   },
   {
-    initial: "R",
-    name: "raja antony",
-    time: "4 months ago",
+    initial: "M",
+    name: "Muthukumar G",
+    time: "a month ago",
     parts: [
+      { text: "Synergy is the " },
+      { text: "perfect place for best physio therapy", highlight: true },
+      { text: " combined with fitness exercises. Their " },
+      { text: "approach is very unique.", highlight: true },
       {
-        text: "I had a great experience at Synergy Physio Clinic. They are very professional, incredibly friendly and patient. I visited here for the ",
+        text: " They first understand the problem very well, assess the same and perform ",
       },
-      { text: "hip and back related issues", highlight: true },
-      { text: " and thanks to the treatment and guidance it has been healed." },
+      { text: "customised therapies", highlight: true },
+      {
+        text: " and fitness programs. It's a blessing that I got to know about this centre and ",
+      },
+      { text: "now my pain is fully relieved", highlight: true },
+      { text: " thanks to the efforts of Dr Franklin (Head of the Centre) & Dr Azeez. I took 3 months sessions with Dr. Azeez and he has done " },
+      { text: "wonders with his systematic approach of therapy,", highlight: true },
+      {
+        text: " stretches, exercises etc. As per their recommendation, I moved on to fitness with Dr. Sanjith, who is very good in ",
+      },
+      { text: "providing correct solution", highlight: true },
+      { text: " for every condition including core building. Overall I am " },
+      { text: "very happy about their approach", highlight: true },
+      { text: " and I " },
+      { text: "would recommend them", highlight: true },
+      { text: " for any kind of therapies, fitness, knee pain, back pain, rehab and pain relief." },
+    ],
+  },
+  {
+    initial: "J",
+    name: "Jayakumar Thiagarajan",
+    time: "3 months ago",
+    parts: [
+      { text: "I was " },
+      { text: "suffering from a frozen shoulder", highlight: true },
+      {
+        text: " on my left side, which made even simple movements extremely difficult and painful. I enrolled for physiotherapy at Synergy, where Dr. Franklin and Dr. Sri Priya designed a structured and ",
+      },
+      { text: "personalized treatment plan for me.", highlight: true },
+      {
+        text: " The initial phase involved muscle loosening, which was understandably quite painful. However, Dr. Sri Priya ensured that this process was carried out in a ",
+      },
+      { text: "very systematic and controlled manner", highlight: true },
+      {
+        text: ", giving me confidence throughout the treatment. Gradually, stretches and strengthening exercises were introduced. This step-by-step progression proved ",
+      },
+      { text: "highly effective", highlight: true },
+      { text: ", and within just " },
+      { text: "10–12 sessions", highlight: true },
+      { text: ", I experienced nearly " },
+      { text: "70–75% improvement.", highlight: true },
+      { text: " Despite my professional commitments, both doctors were extremely " },
+      { text: "patient, accommodating, and committed", highlight: true },
+      { text: " to my recovery." },
+    ],
+  },
+  {
+    initial: "S",
+    name: "saravanan saran",
+    time: "3 months ago",
+    parts: [
+      { text: "Went to my shoulder and " },
+      { text: "lowerback pain.", highlight: true },
+      { text: " My " },
+      { text: "pain reduced to 90%", highlight: true },
+      { text: " after the sessions. Dr. Yasini mam was great and she helped me to recover from my pain." },
+    ],
+  },
+  {
+    initial: "S",
+    name: "Shruti Jain",
+    time: "2 months ago",
+    parts: [
+      { text: "I would like to sincerely thank the team at Synergy Physiotherapist Center, especially Dr. Lokesh, for the " },
+      { text: "excellent care and support during my treatment.", highlight: true },
+      { text: " I was dealing with back pain, knee pain, and muscle weakness, and Dr. Lokesh helped me " },
+      { text: "overcome all of these issues", highlight: true },
+      { text: " with great " },
+      { text: "care, guidance, and effective physiotherapy treatment.", highlight: true },
+      { text: " The entire team at Synergy is " },
+      { text: "professional, supportive, and dedicated to patient recovery.", highlight: true },
+      { text: " I would " },
+      { text: "highly recommend Synergy Physiotherapist Center", highlight: true },
+      { text: " to anyone dealing with pain or looking for quality physiotherapy care." },
     ],
   },
 ];
@@ -127,7 +250,7 @@ export const reviews: Review[] = [
 export const steps = [
   {
     title: "Book a slot",
-    body: "Fill the form or call — we confirm within 15 minutes.",
+    body: "Fill the form or call to confirm your slot",
   },
   {
     title: "Get assessed",
