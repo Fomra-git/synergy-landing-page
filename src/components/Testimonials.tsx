@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { reviews, videoStories, type Review, type VideoStory } from "@/lib/data";
 import { IconClose, IconPlay, IconStar } from "./icons";
+import CardCarousel, { type CardCarouselApi } from "./CardCarousel";
 
 const SLIDE_INTERVAL_MS = 4000;
 
@@ -19,7 +20,7 @@ function VideoThumb({ video, onPlay }: { video: VideoStory; onPlay: (id: string)
         src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
         alt={video.caption}
         fill
-        sizes="(min-width: 1024px) 25vw, 280px"
+        sizes="(min-width: 1024px) 33vw, 280px"
         className="origin-top scale-[1.7] object-cover transition-transform duration-300 group-hover:scale-[1.8]"
       />
       <span className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent" />
@@ -71,41 +72,29 @@ export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
+  const [videoApi, setVideoApi] = useState<CardCarouselApi | null>(null);
+  const [reviewApi, setReviewApi] = useState<CardCarouselApi | null>(null);
   const activeStory = videoStories.find((v) => v.youtubeId === activeVideo);
 
-  useEffect(() => {
-    if (activeVideo) return;
-    const timer = setInterval(() => {
-      setSlideIndex((i) => (i + 1) % videoStories.length);
-    }, SLIDE_INTERVAL_MS);
-    return () => clearInterval(timer);
-  }, [activeVideo]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setReviewIndex((i) => (i + 1) % reviews.length);
-    }, SLIDE_INTERVAL_MS);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <section id="testimonials" className="bg-cloud py-10 sm:py-14 lg:py-20">
+    <section id="testimonials" className="bg-cloud py-7 sm:py-9 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <span className="text-[11.5px] font-bold uppercase tracking-[0.14em] text-accent">Real Results</span>
         <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">Hear It From Our Patients</h2>
 
-        {/* Videos: single auto-sliding card below lg, static 4-col grid at lg+ */}
+        {/* Videos: continuous-loop single card below lg, 3-card carousel at lg+ */}
         <div className="mx-auto mt-5 w-full max-w-[280px] overflow-hidden rounded-2xl shadow-soft sm:max-w-xs lg:hidden">
-          <div
-            className="flex transition-transform duration-500 ease-out"
-            style={{ transform: `translateX(-${slideIndex * 100}%)` }}
-          >
-            {videoStories.map((video) => (
-              <div key={video.youtubeId} className="w-full shrink-0">
-                <VideoThumb video={video} onPlay={setActiveVideo} />
-              </div>
-            ))}
-          </div>
+          <CardCarousel
+            items={videoStories}
+            getKey={(v) => v.youtubeId}
+            visible={1}
+            showEmphasis={false}
+            autoplayDelay={SLIDE_INTERVAL_MS}
+            paused={!!activeVideo}
+            onActiveChange={setSlideIndex}
+            onReady={setVideoApi}
+            renderItem={(v) => <VideoThumb video={v} onPlay={setActiveVideo} />}
+          />
         </div>
 
         <div className="mt-3 flex justify-center gap-1.5 lg:hidden">
@@ -113,7 +102,7 @@ export default function Testimonials() {
             <button
               key={video.youtubeId}
               type="button"
-              onClick={() => setSlideIndex(i)}
+              onClick={() => videoApi?.goTo(i)}
               aria-label={`Go to video ${i + 1}`}
               className={`h-1.5 rounded-full transition-all ${
                 i === slideIndex ? "w-5 bg-accent" : "w-1.5 bg-line"
@@ -122,24 +111,27 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div className="hidden lg:mt-8 lg:grid lg:grid-cols-4 lg:gap-5">
-          {videoStories.map((video) => (
-            <VideoThumb key={video.youtubeId} video={video} onPlay={setActiveVideo} />
-          ))}
+        <div className="mt-8 hidden lg:block">
+          <CardCarousel
+            items={videoStories}
+            getKey={(v) => v.youtubeId}
+            paused={!!activeVideo}
+            renderItem={(v) => <VideoThumb video={v} onPlay={setActiveVideo} />}
+          />
         </div>
 
-        {/* Reviews: single auto-sliding card below lg, static 3-col grid at lg+ */}
+        {/* Reviews: continuous-loop single card below lg, 3-card carousel at lg+ */}
         <div className="mx-auto mt-5 w-full max-w-[280px] overflow-hidden sm:max-w-xs lg:hidden">
-          <div
-            className="flex transition-transform duration-500 ease-out"
-            style={{ transform: `translateX(-${reviewIndex * 100}%)` }}
-          >
-            {reviews.map((r) => (
-              <div key={r.name} className="w-full shrink-0">
-                <ReviewCard review={r} />
-              </div>
-            ))}
-          </div>
+          <CardCarousel
+            items={reviews}
+            getKey={(r) => r.name}
+            visible={1}
+            showEmphasis={false}
+            autoplayDelay={SLIDE_INTERVAL_MS}
+            onActiveChange={setReviewIndex}
+            onReady={setReviewApi}
+            renderItem={(r) => <ReviewCard review={r} />}
+          />
         </div>
 
         <div className="mt-3 flex justify-center gap-1.5 lg:hidden">
@@ -147,7 +139,7 @@ export default function Testimonials() {
             <button
               key={r.name}
               type="button"
-              onClick={() => setReviewIndex(i)}
+              onClick={() => reviewApi?.goTo(i)}
               aria-label={`Go to review ${i + 1}`}
               className={`h-1.5 rounded-full transition-all ${
                 i === reviewIndex ? "w-5 bg-accent" : "w-1.5 bg-line"
@@ -156,10 +148,8 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div className="hidden lg:mt-8 lg:grid lg:grid-cols-3 lg:gap-5">
-          {reviews.map((r) => (
-            <ReviewCard key={r.name} review={r} />
-          ))}
+        <div className="mt-8 hidden lg:block">
+          <CardCarousel items={reviews} getKey={(r) => r.name} renderItem={(r) => <ReviewCard review={r} />} />
         </div>
       </div>
 
