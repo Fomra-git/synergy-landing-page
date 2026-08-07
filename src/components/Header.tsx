@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { branches, navLinks } from "@/lib/data";
 import { useBookingModal } from "@/context/BookingModalContext";
-import { IconMenu, IconClose, IconPin } from "./icons";
+import { IconMenu, IconClose, IconPushPin } from "./icons";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -81,7 +81,7 @@ export default function Header() {
             href="#locations"
             className="flex min-w-0 items-center justify-center gap-0.5 rounded-full border border-line bg-cloud px-0.5 py-1.5 text-navy transition-colors hover:border-accent hover:text-accent sm:gap-1 sm:px-3"
           >
-            <IconPin className="size-2.5 shrink-0 opacity-60 sm:size-3.5" />
+            <IconPushPin className="size-3 shrink-0 sm:size-4" />
             <span className="truncate text-[9.5px] font-semibold sm:text-[12.5px]">{branch.name}</span>
           </a>
         ))}

@@ -1,11 +1,11 @@
 import { differentiators } from "@/lib/data";
-import { IconHeart, IconStar, IconClock, IconTools } from "./icons";
+import { IconHeart, IconStar, IconClock, IconShieldCheck } from "./icons";
 
-const icons = [IconHeart, IconStar, IconClock, IconTools];
+const icons = [IconHeart, IconStar, IconClock, IconShieldCheck];
 
 export default function WhySynergy() {
   return (
-    <section id="why" className="py-12 sm:py-16 lg:py-24">
+    <section id="why" className="py-8 sm:py-10 lg:py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <span className="text-[11.5px] font-bold uppercase tracking-[0.14em] text-accent">Why Synergy</span>
         <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">Care Built Around You</h2>
