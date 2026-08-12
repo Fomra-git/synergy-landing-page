@@ -8,7 +8,19 @@ import CardCarousel, { type CardCarouselApi } from "./CardCarousel";
 
 const SLIDE_INTERVAL_MS = 4000;
 
-function VideoThumb({ video, onPlay }: { video: VideoStory; onPlay: (id: string) => void }) {
+const THUMB_FALLBACKS = ["hq2.jpg", "hqdefault.jpg", "mqdefault.jpg", "default.jpg"];
+
+function VideoThumb({
+  video,
+  onPlay,
+  priority = false,
+}: {
+  video: VideoStory;
+  onPlay: (id: string) => void;
+  priority?: boolean;
+}) {
+  const [thumbLevel, setThumbLevel] = useState(0);
+
   return (
     <button
       type="button"
@@ -17,10 +29,14 @@ function VideoThumb({ video, onPlay }: { video: VideoStory; onPlay: (id: string)
       className="group relative aspect-square w-full shrink-0 overflow-hidden rounded-2xl bg-navy shadow-soft"
     >
       <Image
-        src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+        key={thumbLevel}
+        src={`https://img.youtube.com/vi/${video.youtubeId}/${THUMB_FALLBACKS[thumbLevel]}`}
         alt={video.caption}
         fill
+        unoptimized
+        priority={priority}
         sizes="(min-width: 1024px) 33vw, 280px"
+        onError={() => setThumbLevel((l) => Math.min(l + 1, THUMB_FALLBACKS.length - 1))}
         className="origin-top scale-[1.7] object-cover transition-transform duration-300 group-hover:scale-[1.8]"
       />
       <span className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent" />
@@ -93,7 +109,7 @@ export default function Testimonials() {
             paused={!!activeVideo}
             onActiveChange={setSlideIndex}
             onReady={setVideoApi}
-            renderItem={(v) => <VideoThumb video={v} onPlay={setActiveVideo} />}
+            renderItem={(v, i) => <VideoThumb video={v} onPlay={setActiveVideo} priority={i === 0} />}
           />
         </div>
 
@@ -116,7 +132,7 @@ export default function Testimonials() {
             items={videoStories}
             getKey={(v) => v.youtubeId}
             paused={!!activeVideo}
-            renderItem={(v) => <VideoThumb video={v} onPlay={setActiveVideo} />}
+            renderItem={(v, i) => <VideoThumb video={v} onPlay={setActiveVideo} priority={i === 0} />}
           />
         </div>
 

@@ -32,16 +32,56 @@ function Select({
 
 export default function BookingForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [age, setAge] = useState("");
+  const [loadedAt] = useState(() => Date.now());
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    if (!name.trim() || !phone.trim()) return;
-    setSubmitted(true);
-    form.reset();
-    setPhone("");
+    if (!name.trim() || submitting) return;
+
+    if (phone.length !== 10) {
+      setError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    const formData = new FormData(form);
+    setSubmitting(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          age,
+          pain: formData.get("pain"),
+          branch: formData.get("branch"),
+          company: formData.get("company"),
+          loadedAt,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setError(data?.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+      form.reset();
+      setPhone("");
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -75,6 +115,16 @@ export default function BookingForm() {
         No Spam. Your details used only to confirm your slot.
       </p>
 
+      {/* Honeypot: hidden from real users, bots tend to fill every field. */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-9999px] top-auto size-px opacity-0"
+      />
+
       <div className="mb-1.5 sm:mb-2">
         <label htmlFor="name" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
           Full name
@@ -101,8 +151,9 @@ export default function BookingForm() {
             name="phone"
             type="tel"
             inputMode="numeric"
-            pattern="[0-9]*"
+            pattern="[0-9]{10}"
             maxLength={10}
+            minLength={10}
             placeholder="98XXXXXXXX"
             required
             value={phone}
@@ -117,11 +168,13 @@ export default function BookingForm() {
           <input
             id="age"
             name="age"
-            type="number"
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             placeholder="Age"
-            min={1}
-            max={110}
             required
+            value={age}
+            onChange={(e) => setAge(e.target.value.replace(/\D/g, "").slice(0, 2))}
             className={inputClasses}
           />
         </div>
@@ -151,11 +204,14 @@ export default function BookingForm() {
         </Select>
       </div>
 
+      {error && <p className="mb-2 text-center text-[12.5px] font-semibold text-red-600">{error}</p>}
+
       <button
         type="submit"
-        className="w-full rounded-xl bg-accent px-5 py-3 text-[15px] font-bold text-white shadow-[0_8px_20px_-6px_rgba(14,107,224,0.45)] transition-transform hover:bg-accent-dark active:scale-[0.97] sm:py-3.5"
+        disabled={submitting}
+        className="w-full rounded-xl bg-accent px-5 py-3 text-[15px] font-bold text-white shadow-[0_8px_20px_-6px_rgba(14,107,224,0.45)] transition-transform hover:bg-accent-dark active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-70 sm:py-3.5"
       >
-        Confirm My Appointment
+        {submitting ? "Submitting…" : "Confirm My Appointment"}
       </button>
     </form>
   );

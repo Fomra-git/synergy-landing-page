@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { branches } from "@/lib/data";
 import { IconPin } from "./icons";
@@ -8,6 +8,13 @@ import { IconPin } from "./icons";
 export default function Locations() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeBranch = branches[activeIndex];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((i) => (i + 1) % branches.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section id="locations" className="py-8 sm:py-10 lg:py-14">
@@ -26,7 +33,7 @@ export default function Locations() {
               alt={`Synergy Healthcare & Wellness — ${activeBranch.name}`}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
+              className="animate-fade-in object-cover"
               priority
             />
           </div>

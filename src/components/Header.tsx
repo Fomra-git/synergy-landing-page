@@ -19,7 +19,8 @@ export default function Header() {
             alt="Synergy Healthcare & Wellness"
             width={168}
             height={64}
-            className="h-10 w-auto sm:h-11"
+            className="h-12 sm:h-14"
+            style={{ width: "auto" }}
             priority
           />
         </a>

@@ -33,6 +33,7 @@
   --shadow-lifted: 0 10px 30px -12px rgba(18, 49, 75, 0.25);
 
   --animate-fade-up: fade-up 0.6s ease both;
+  --animate-fade-in: fade-in 0.6s ease both;
 
   @keyframes fade-up {
     from {
@@ -42,6 +43,15 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 }

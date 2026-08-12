@@ -68,8 +68,8 @@ export default function Treatments() {
 
   useEffect(
     () => () => {
-      resumeTimer.current && clearTimeout(resumeTimer.current);
-      settleTimer.current && clearTimeout(settleTimer.current);
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+      if (settleTimer.current) clearTimeout(settleTimer.current);
     },
     [],
   );

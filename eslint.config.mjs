@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Custom Node.js hosting entry point — plain CommonJS, not bundled
+    // by Next's compiler, so the app's TS/ESM lint rules don't apply.
+    "server.js",
   ]),
 ]);
 

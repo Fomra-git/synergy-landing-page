@@ -24,7 +24,8 @@ export default function Footer() {
               alt="Synergy Healthcare & Wellness"
               width={168}
               height={64}
-              className="h-14 w-auto"
+              className="h-16"
+              style={{ width: "auto" }}
             />
             <div className="mt-4 flex items-center gap-4">
               {socialLinks.map((s) => {

@@ -284,20 +284,24 @@ export type VideoStory = {
 
 export const videoStories: VideoStory[] = [
   {
-    youtubeId: "WEKLrNEhjhI",
-    caption: "Watch: Sanjith Kumar Recovery Story | Neck Sprain",
+    youtubeId: "gf_AdIZeUVg",
+    caption: "Watch: Meenu ma'am's Ligament Tear Recovery Journey",
   },
   {
-    youtubeId: "zYWyTU4ejOY",
-    caption: "Watch Recovery Story of Meenu | Ligament Tear",
+    youtubeId: "uzSwP6p3m8w",
+    caption: "Watch: Strength and Confidence with Fitness Sessions",
   },
   {
-    youtubeId: "IsF8ziZEMp0",
-    caption: "Watch Recovery Story of John | Prolonged Neck Pain",
+    youtubeId: "_0chk9qzRXA",
+    caption: "Watch: Mouth Movement Solved in 6 Sessions",
   },
   {
-    youtubeId: "rcJZ5AhoGyE",
-    caption: "Watch Recovery Story of Asish",
+    youtubeId: "LgPhZrxxMAE",
+    caption: "Watch: Neck Pain Resolved in 5 Sessions",
+  },
+  {
+    youtubeId: "Mswhy15efFg",
+    caption: "Watch: Mr. Sanjeev's Neck Sprain Transformation",
   },
 ];
 
