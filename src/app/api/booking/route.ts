@@ -1,5 +1,6 @@
 import { after } from "next/server";
 import { evaluateSubmission, isRateLimited, type BookingSubmission } from "@/lib/spam";
+import { createZohoLead } from "@/lib/zoho";
 
 export async function POST(request: Request) {
   let body: Partial<BookingSubmission>;
@@ -40,7 +41,7 @@ export async function POST(request: Request) {
   // checks, and so bots get no signal about whether they were caught.
   // The actual verification runs in the background after the response
   // has already been sent.
-  after(() => {
+  after(async () => {
     const verdict = evaluateSubmission(submission);
 
     if (verdict.isSpam) {
@@ -52,14 +53,18 @@ export async function POST(request: Request) {
       return;
     }
 
-    // Verified lead. No notification provider (email/SMS/CRM) is wired
-    // up yet — this is the integration point for one.
     console.log("[booking] verified lead", {
       ip,
       name: submission.name,
       phone: submission.phone,
       branch: submission.branch,
     });
+
+    try {
+      await createZohoLead(submission);
+    } catch (err) {
+      console.error("[booking] failed to create Zoho lead", err);
+    }
   });
 
   return Response.json({ ok: true });
