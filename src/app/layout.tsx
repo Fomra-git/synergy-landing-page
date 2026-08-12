@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { BookingModalProvider } from "@/context/BookingModalContext";
 import BookingModal from "@/components/BookingModal";
+import ImageRecovery from "@/components/ImageRecovery";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -36,6 +37,7 @@ export default function RootLayout({
           {children}
           <BookingModal />
         </BookingModalProvider>
+        <ImageRecovery />
       </body>
     </html>
   );

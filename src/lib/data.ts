@@ -280,28 +280,34 @@ export const painAreas = [
 export type VideoStory = {
   youtubeId: string;
   caption: string;
+  thumbnail: string;
 };
 
 export const videoStories: VideoStory[] = [
   {
     youtubeId: "gf_AdIZeUVg",
     caption: "Watch: Meenu ma'am's Ligament Tear Recovery Journey",
+    thumbnail: "/images/testimonials/meenu-ligament-tear-shorts-cover.jpg",
   },
   {
     youtubeId: "uzSwP6p3m8w",
     caption: "Watch: Strength and Confidence with Fitness Sessions",
+    thumbnail: "/images/testimonials/strength-confidence-fitness-shorts-cover.jpg",
   },
   {
     youtubeId: "_0chk9qzRXA",
     caption: "Watch: Mouth Movement Solved in 6 Sessions",
+    thumbnail: "/images/testimonials/mouth-movement-6-sessions-shorts-cover.jpg",
   },
   {
     youtubeId: "LgPhZrxxMAE",
     caption: "Watch: Neck Pain Resolved in 5 Sessions",
+    thumbnail: "/images/testimonials/neck-pain-5-sessions-shorts-cover.jpg",
   },
   {
     youtubeId: "Mswhy15efFg",
     caption: "Watch: Mr. Sanjeev's Neck Sprain Transformation",
+    thumbnail: "/images/testimonials/sanjeev-neck-sprain-shorts-cover.jpg",
   },
 ];
 

@@ -8,8 +8,6 @@ import CardCarousel, { type CardCarouselApi } from "./CardCarousel";
 
 const SLIDE_INTERVAL_MS = 4000;
 
-const THUMB_FALLBACKS = ["hq2.jpg", "hqdefault.jpg", "mqdefault.jpg", "default.jpg"];
-
 function VideoThumb({
   video,
   onPlay,
@@ -19,33 +17,25 @@ function VideoThumb({
   onPlay: (id: string) => void;
   priority?: boolean;
 }) {
-  const [thumbLevel, setThumbLevel] = useState(0);
-
   return (
     <button
       type="button"
       onClick={() => onPlay(video.youtubeId)}
       aria-label={`Play video: ${video.caption}`}
-      className="group relative aspect-square w-full shrink-0 overflow-hidden rounded-2xl bg-navy shadow-soft"
+      className="group relative aspect-[9/16] w-full shrink-0 overflow-hidden rounded-2xl bg-navy shadow-soft"
     >
       <Image
-        key={thumbLevel}
-        src={`https://img.youtube.com/vi/${video.youtubeId}/${THUMB_FALLBACKS[thumbLevel]}`}
+        src={video.thumbnail}
         alt={video.caption}
         fill
-        unoptimized
         priority={priority}
         sizes="(min-width: 1024px) 33vw, 280px"
-        onError={() => setThumbLevel((l) => Math.min(l + 1, THUMB_FALLBACKS.length - 1))}
-        className="origin-top scale-[1.7] object-cover transition-transform duration-300 group-hover:scale-[1.8]"
+        className="object-cover transition-transform duration-300 group-hover:scale-105"
       />
-      <span className="absolute inset-0 bg-linear-to-t from-black/85 via-black/15 to-transparent" />
-      <span className="absolute inset-x-0 bottom-0 flex items-center gap-2 p-3">
-        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white/95 shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-transform group-hover:scale-105">
-          <IconPlay className="ml-0.5 size-3 fill-accent" />
-        </span>
-        <span className="line-clamp-2 text-left text-[12px] font-bold leading-tight text-white">
-          {video.caption}
+      <span className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/25" />
+      <span className="absolute inset-0 flex items-center justify-center">
+        <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-white/95 shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-transform group-hover:scale-110">
+          <IconPlay className="ml-1 size-5 fill-accent" />
         </span>
       </span>
     </button>
@@ -174,7 +164,10 @@ export default function Testimonials() {
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
           onClick={() => setActiveVideo(null)}
         >
-          <div className="relative w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="relative aspect-[9/16] w-full max-h-[85vh] max-w-sm"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               onClick={() => setActiveVideo(null)}
@@ -183,7 +176,7 @@ export default function Testimonials() {
             >
               <IconClose className="size-5" />
             </button>
-            <div className="aspect-video overflow-hidden rounded-2xl shadow-lifted">
+            <div className="size-full overflow-hidden rounded-2xl shadow-lifted">
               <iframe
                 src={`https://www.youtube.com/embed/${activeStory.youtubeId}?autoplay=1&rel=0`}
                 title={activeStory.caption}
