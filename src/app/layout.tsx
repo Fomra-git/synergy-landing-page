@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { BookingModalProvider } from "@/context/BookingModalContext";
 import BookingModal from "@/components/BookingModal";
 import ImageRecovery from "@/components/ImageRecovery";
 import "./globals.css";
 
-const fraunces = Fraunces({
+// Self-hosted (rather than next/font/google) so the build doesn't depend on
+// reaching Google's font CDN — a Vercel build failed when that fetch got
+// blocked mid-build. Both files are the actual variable-weight fonts Google
+// serves (latin subset), so every weight in use (400–800 for Inter, 500–700
+// for Fraunces) still renders correctly from the one file each.
+const fraunces = localFont({
+  src: "../fonts/fraunces-variable.woff2",
   variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
   display: "swap",
 });
 
-const inter = Inter({
+const inter = localFont({
+  src: "../fonts/inter-variable.woff2",
   variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
