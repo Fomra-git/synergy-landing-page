@@ -89,7 +89,7 @@ export default function Testimonials() {
         <h2 className="mt-1.5 text-[26px] leading-tight sm:text-3xl lg:text-4xl">Hear It From Our Patients</h2>
 
         {/* Videos: continuous-loop single card below lg, 3-card carousel at lg+ */}
-        <div className="mx-auto mt-5 w-full max-w-[280px] sm:max-w-xs lg:hidden">
+        <div className="mx-auto mt-5 w-full sm:max-w-xs lg:hidden">
           <CardCarousel
             items={videoStories}
             getKey={(v) => v.youtubeId}
@@ -127,7 +127,7 @@ export default function Testimonials() {
         </div>
 
         {/* Reviews: continuous-loop single card below lg, 3-card carousel at lg+ */}
-        <div className="mx-auto mt-5 w-full max-w-[280px] sm:max-w-xs lg:hidden">
+        <div className="mx-auto mt-5 w-full sm:max-w-xs lg:hidden">
           <CardCarousel
             items={reviews}
             getKey={(r) => r.name}

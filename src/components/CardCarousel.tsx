@@ -129,35 +129,37 @@ export default function CardCarousel<T>({
       onPointerDown={pauseWithTimer}
       onTouchStart={pauseWithTimer}
     >
-      <div className={outside ? "overflow-hidden px-9" : ""}>
-        <div
-          onTransitionEnd={handleTransitionEnd}
-          className="flex"
-          style={{
-            width: `${(extLen / visible) * 100}%`,
-            transform: `translateX(-${index * (100 / extLen)}%)`,
-            transition: withTransition ? "transform 500ms ease-out" : "none",
-          }}
-        >
-          {extended.map((item, i) => {
-            const isCenter = canLoop ? i - index === centerOffset : i === centerOffset;
-            const originalIndex = canLoop ? ((i - offset) % n + n) % n : i;
-            return (
-              <div
-                key={`${getKey(item)}-${i}`}
-                className={`shrink-0 ${visible > 1 ? "px-2.5" : ""}`.trim()}
-                style={{ width: `${100 / extLen}%` }}
-              >
+      <div className={outside ? "px-8" : ""}>
+        <div className="overflow-hidden">
+          <div
+            onTransitionEnd={handleTransitionEnd}
+            className="flex"
+            style={{
+              width: `${(extLen / visible) * 100}%`,
+              transform: `translateX(-${index * (100 / extLen)}%)`,
+              transition: withTransition ? "transform 500ms ease-out" : "none",
+            }}
+          >
+            {extended.map((item, i) => {
+              const isCenter = canLoop ? i - index === centerOffset : i === centerOffset;
+              const originalIndex = canLoop ? ((i - offset) % n + n) % n : i;
+              return (
                 <div
-                  className={`h-full transition-transform duration-500 ${
-                    showEmphasis ? (isCenter ? "scale-100" : "scale-[0.94]") : ""
-                  }`.trim()}
+                  key={`${getKey(item)}-${i}`}
+                  className={`shrink-0 ${visible > 1 ? "px-2.5" : ""}`.trim()}
+                  style={{ width: `${100 / extLen}%` }}
                 >
-                  {renderItem(item, originalIndex)}
+                  <div
+                    className={`h-full transition-transform duration-500 ${
+                      showEmphasis ? (isCenter ? "scale-100" : "scale-[0.94]") : ""
+                    }`.trim()}
+                  >
+                    {renderItem(item, originalIndex)}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
