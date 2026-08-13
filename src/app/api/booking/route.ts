@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, phone, age, pain, branch, loadedAt } = body;
-  if (!name || !phone || !age || !pain || !branch || typeof loadedAt !== "number") {
+  const { name, countryCode, phone, age, pain, branch, loadedAt } = body;
+  if (!name || !countryCode || !phone || !age || !pain || !branch || typeof loadedAt !== "number") {
     return Response.json({ ok: false, error: "Missing required fields." }, { status: 400 });
   }
 
@@ -29,6 +29,7 @@ export async function POST(request: Request) {
 
   const submission: BookingSubmission = {
     name,
+    countryCode,
     phone,
     age,
     pain,

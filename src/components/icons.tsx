@@ -95,6 +95,22 @@ export function IconChevronDown({ className }: IconProps) {
   );
 }
 
+export function IconChevronLeft({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <polyline points="15 6 9 12 15 18" />
+    </svg>
+  );
+}
+
+export function IconChevronRight({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <polyline points="9 6 15 12 9 18" />
+    </svg>
+  );
+}
+
 export function IconHeart({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinejoin="round" className={className}>

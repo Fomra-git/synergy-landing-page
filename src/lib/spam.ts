@@ -22,6 +22,7 @@ export function isRateLimited(ip: string): boolean {
 
 export type BookingSubmission = {
   name: string;
+  countryCode: string;
   phone: string;
   age: string;
   pain: string;

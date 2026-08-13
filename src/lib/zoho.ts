@@ -2,7 +2,7 @@ import type { BookingSubmission } from "./spam";
 
 const ACCOUNTS_DOMAIN = process.env.ZOHO_ACCOUNTS_DOMAIN || "https://accounts.zoho.in";
 const API_DOMAIN = process.env.ZOHO_API_DOMAIN || "https://www.zohoapis.in";
-const LEAD_SOURCE = "Google-Whizzcom";
+const LEAD_SOURCE = "Google Landing Page";
 const DEFAULT_COMPANY = "Synergy Healthcare & Wellness";
 
 // Access tokens last 1 hour; cached in-memory per server instance and
@@ -61,14 +61,12 @@ export async function createZohoLead(submission: BookingSubmission) {
         {
           Last_Name: lastName || firstName || "Website Lead",
           First_Name: firstName || undefined,
-          Phone: submission.phone,
+          Phone: `${submission.countryCode}${submission.phone}`,
           Company: DEFAULT_COMPANY,
           Lead_Source: LEAD_SOURCE,
-          Description: [
-            `Age: ${submission.age}`,
-            `Area of pain: ${submission.pain}`,
-            `Preferred branch: ${submission.branch}`,
-          ].join("\n"),
+          "Area Of Pain": submission.pain,
+          "Branch Preferred": submission.branch,
+          Description: `Age: ${submission.age}`,
         },
       ],
     }),

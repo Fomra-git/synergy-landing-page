@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { treatments, type Treatment } from "@/lib/data";
 import { useBookingModal } from "@/context/BookingModalContext";
+import { IconChevronLeft, IconChevronRight } from "./icons";
 import CardCarousel from "./CardCarousel";
 
 function TreatmentCard({ t, eager }: { t: Treatment; eager?: boolean }) {
@@ -99,6 +100,20 @@ export default function Treatments() {
     }, 120);
   }, [scrollToIndex]);
 
+  const handlePrev = useCallback(() => {
+    pauseAutoplay();
+    const prevIndex = active > 0 ? active - 1 : treatments.length - 1;
+    scrollToIndex(prevIndex);
+    setActive(prevIndex);
+  }, [active, pauseAutoplay, scrollToIndex]);
+
+  const handleNext = useCallback(() => {
+    pauseAutoplay();
+    const nextIndex = active + 1;
+    scrollToIndex(nextIndex);
+    setActive(nextIndex);
+  }, [active, pauseAutoplay, scrollToIndex]);
+
   return (
     <section id="treatments" className="bg-cloud py-7 sm:py-9 lg:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -109,32 +124,51 @@ export default function Treatments() {
         </p>
       </div>
 
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        onPointerDown={pauseAutoplay}
-        onTouchStart={pauseAutoplay}
-        onMouseEnter={pauseAutoplay}
-        className="no-scrollbar mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 pb-2 sm:px-6 lg:hidden"
-      >
-        {mobileTreatments.map((t, i) => (
-          <div key={`${t.title}-${i}`} className="relative w-[190px] shrink-0 snap-start">
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-line shadow-soft">
-              <Image
-                src={t.image}
-                alt={t.title}
-                fill
-                sizes="190px"
-                loading={i < 2 ? "eager" : "lazy"}
-                className="object-cover"
-              />
+      <div className="relative lg:hidden">
+        <div
+          ref={trackRef}
+          onScroll={handleScroll}
+          onPointerDown={pauseAutoplay}
+          onTouchStart={pauseAutoplay}
+          onMouseEnter={pauseAutoplay}
+          className="no-scrollbar mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 pb-2 sm:px-6"
+        >
+          {mobileTreatments.map((t, i) => (
+            <div key={`${t.title}-${i}`} className="relative w-[190px] shrink-0 snap-start">
+              <div className="relative aspect-square overflow-hidden rounded-2xl border border-line shadow-soft">
+                <Image
+                  src={t.image}
+                  alt={t.title}
+                  fill
+                  sizes="190px"
+                  loading={i < 2 ? "eager" : "lazy"}
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute inset-x-2.5 bottom-2.5 rounded-xl bg-white/95 px-2.5 py-2 text-center shadow-[0_4px_14px_rgba(18,49,75,0.18)] backdrop-blur-sm">
+                <span className="text-[12.5px] font-bold leading-snug text-navy">{t.title}</span>
+              </div>
             </div>
-            <div className="absolute inset-x-2.5 bottom-2.5 rounded-xl bg-white/95 px-2.5 py-2 text-center shadow-[0_4px_14px_rgba(18,49,75,0.18)] backdrop-blur-sm">
-              <span className="text-[12.5px] font-bold leading-snug text-navy">{t.title}</span>
-            </div>
-          </div>
-        ))}
-        <div className="w-[70vw] shrink-0" aria-hidden="true" />
+          ))}
+          <div className="w-[70vw] shrink-0" aria-hidden="true" />
+        </div>
+
+        <button
+          type="button"
+          onClick={handlePrev}
+          aria-label="Previous treatment"
+          className="absolute left-2 top-1/2 z-10 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-accent text-white shadow-[0_2px_10px_rgba(18,49,75,0.25)] transition-colors hover:bg-accent-dark"
+        >
+          <IconChevronLeft className="size-5" />
+        </button>
+        <button
+          type="button"
+          onClick={handleNext}
+          aria-label="Next treatment"
+          className="absolute right-2 top-1/2 z-10 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-accent text-white shadow-[0_2px_10px_rgba(18,49,75,0.25)] transition-colors hover:bg-accent-dark"
+        >
+          <IconChevronRight className="size-5" />
+        </button>
       </div>
 
       <div className="mt-3 flex flex-wrap justify-center gap-1.5 px-4 lg:hidden">

@@ -1,13 +1,82 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { branches, painAreas } from "@/lib/data";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { branches, countryCodes, flagUrl, painAreas } from "@/lib/data";
 import { IconChevronDown } from "./icons";
 
 const inputClasses =
   "w-full rounded-xl border-[1.5px] border-line bg-[#FBFDFE] px-3 py-2 text-sm text-ink placeholder:text-ink-soft/60 focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20 sm:py-2.5";
 
 const selectClasses = `${inputClasses} appearance-none pr-9`;
+
+function CountryCodeSelect({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const selected = countryCodes.find((c) => c.dial === value) ?? countryCodes[0];
+
+  useEffect(() => {
+    if (!open) return;
+    function onPointerDown(e: PointerEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div ref={rootRef} className="relative shrink-0">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="flex h-full w-[68px] items-center gap-1 rounded-xl border-[1.5px] border-line bg-[#FBFDFE] py-2 pl-2 pr-1 text-sm text-ink focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20 sm:py-2.5"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={flagUrl(selected.iso)} alt="" className="h-3 w-4.5 shrink-0 rounded-[2px] object-cover" />
+        <span className="truncate">{selected.dial}</span>
+        <IconChevronDown className="ml-auto size-3.5 shrink-0 text-ink-soft" />
+      </button>
+
+      {open && (
+        <ul
+          role="listbox"
+          aria-label="Country code"
+          className="absolute left-0 top-full z-20 mt-1 max-h-56 w-60 overflow-y-auto rounded-xl border border-line bg-white py-1 shadow-lifted"
+        >
+          {countryCodes.map((c) => (
+            <li key={c.iso}>
+              <button
+                type="button"
+                role="option"
+                aria-selected={c.dial === value}
+                onClick={() => {
+                  onChange(c.dial);
+                  setOpen(false);
+                }}
+                className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-[13px] hover:bg-cloud ${
+                  c.dial === value ? "bg-accent/5 font-semibold text-navy" : "text-ink"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={flagUrl(c.iso)} alt="" className="h-3 w-4.5 shrink-0 rounded-[2px] object-cover" />
+                <span className="flex-1 truncate">{c.name}</span>
+                <span className="shrink-0 text-ink-soft">{c.dial}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 function Select({
   id,
@@ -35,6 +104,7 @@ export default function BookingForm() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [name, setName] = useState("");
+  const [countryCode, setCountryCode] = useState("+91");
   const [phone, setPhone] = useState("");
   const [age, setAge] = useState("");
   const [loadedAt] = useState(() => Date.now());
@@ -59,6 +129,7 @@ export default function BookingForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
+          countryCode,
           phone,
           age,
           pain: formData.get("pain"),
@@ -76,6 +147,7 @@ export default function BookingForm() {
 
       setSubmitted(true);
       form.reset();
+      setCountryCode("+91");
       setPhone("");
     } catch {
       setError("Network error. Please check your connection and try again.");
@@ -125,39 +197,19 @@ export default function BookingForm() {
         className="pointer-events-none absolute left-[-9999px] top-auto size-px opacity-0"
       />
 
-      <div className="mb-1.5 sm:mb-2">
-        <label htmlFor="name" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
-          Full name
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          placeholder="Enter your name"
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className={inputClasses}
-        />
-      </div>
-
-      <div className="mb-1.5 grid grid-cols-2 gap-2.5 sm:mb-2">
+      <div className="mb-1.5 grid grid-cols-[1fr_64px] gap-2.5 sm:mb-2">
         <div>
-          <label htmlFor="phone" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
-            Phone number
+          <label htmlFor="name" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
+            Full name
           </label>
           <input
-            id="phone"
-            name="phone"
-            type="tel"
-            inputMode="numeric"
-            pattern="[0-9]{10}"
-            maxLength={10}
-            minLength={10}
-            placeholder="98XXXXXXXX"
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Enter your name"
             required
-            value={phone}
-            onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className={inputClasses}
           />
         </div>
@@ -176,6 +228,29 @@ export default function BookingForm() {
             value={age}
             onChange={(e) => setAge(e.target.value.replace(/\D/g, "").slice(0, 2))}
             className={inputClasses}
+          />
+        </div>
+      </div>
+
+      <div className="mb-1.5 sm:mb-2">
+        <label htmlFor="phone" className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide text-navy sm:mb-1">
+          Phone number
+        </label>
+        <div className="flex gap-1.5">
+          <CountryCodeSelect value={countryCode} onChange={setCountryCode} />
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputMode="numeric"
+            pattern="[0-9]{10}"
+            maxLength={10}
+            minLength={10}
+            placeholder="98XXXXXXXX"
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+            className={`${inputClasses} min-w-0 flex-1`}
           />
         </div>
       </div>
