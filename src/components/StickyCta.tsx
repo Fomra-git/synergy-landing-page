@@ -20,22 +20,24 @@ export default function StickyCta() {
         </a>
       </div>
 
-      <a
-        href={`tel:${PHONE_TEL}`}
-        aria-label="Call Now"
-        className="fixed bottom-6 left-6 z-50 hidden size-14 items-center justify-center rounded-full bg-navy text-white shadow-lg transition-transform hover:scale-105 lg:flex"
-      >
-        <IconPhone className="size-6 fill-current" />
-      </a>
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="WhatsApp Us"
-        className="fixed bottom-6 right-6 z-50 hidden size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105 lg:flex"
-      >
-        <IconWhatsapp className="size-6" />
-      </a>
+      <div className="fixed bottom-6 right-6 z-50 hidden flex-col gap-3 lg:flex">
+        <a
+          href={`tel:${PHONE_TEL}`}
+          aria-label="Call Now"
+          className="flex size-14 items-center justify-center rounded-full bg-navy text-white shadow-lg transition-transform hover:scale-105"
+        >
+          <IconPhone className="size-6 fill-current" />
+        </a>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp Us"
+          className="flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105"
+        >
+          <IconWhatsapp className="size-6" />
+        </a>
+      </div>
     </>
   );
 }
