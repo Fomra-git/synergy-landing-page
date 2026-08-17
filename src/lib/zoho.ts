@@ -50,6 +50,11 @@ export async function createZohoLead(submission: BookingSubmission) {
   const token = await getAccessToken();
   const { firstName, lastName } = splitName(submission.name);
 
+  // Assignment rules are not applied automatically on API-created records —
+  // Zoho requires the rule's ID explicitly via lar_id, found in the URL
+  // when editing the rule under Setup > Automation > Assignment Rules.
+  const assignmentRuleId = process.env.ZOHO_ASSIGNMENT_RULE_ID;
+
   const res = await fetch(`${API_DOMAIN}/crm/v2/Leads`, {
     method: "POST",
     headers: {
@@ -67,8 +72,11 @@ export async function createZohoLead(submission: BookingSubmission) {
           Area_Of_Pain: submission.pain,
           Branch_Preferred: submission.branch,
           Description: `Age: ${submission.age}`,
+          Date: new Date().toISOString().slice(0, 10),
+          Inquiry_Type: "Consultation",
         },
       ],
+      ...(assignmentRuleId ? { lar_id: assignmentRuleId } : {}),
     }),
   });
 
