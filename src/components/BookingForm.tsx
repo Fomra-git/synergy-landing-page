@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { branches, countryCodes, flagUrl, painAreas } from "@/lib/data";
+import { branches, countryCodes, flagUrl, painAreas, PHONE_DISPLAY, PHONE_TEL } from "@/lib/data";
 import { IconChevronDown } from "./icons";
 
 const inputClasses =
@@ -164,7 +164,11 @@ export default function BookingForm() {
         </div>
         <h3 className="text-lg text-navy">Thank you, {name.split(" ")[0] || "there"}!</h3>
         <p className="mt-1 text-sm text-ink-soft">
-          Our team will call you shortly to confirm your appointment.
+          Our team will call you shortly to confirm your appointment. For any queries, call us at{" "}
+          <a href={`tel:${PHONE_TEL}`} className="font-semibold text-accent hover:text-accent-dark">
+            {PHONE_DISPLAY}
+          </a>
+          .
         </p>
         <button
           type="button"
