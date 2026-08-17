@@ -184,7 +184,7 @@ export default function BookingForm() {
     >
       <h3 className="text-center text-base text-navy sm:text-lg">Request Your Appointment</h3>
       <p className="mb-1.5 border-b border-line pb-1.5 text-center text-[11.5px] text-ink-soft sm:mb-3 sm:pb-3">
-        No Spam. Your details used only to confirm your slot.
+        Your details are used to confirm your slot.
       </p>
 
       {/* Honeypot: hidden from real users, bots tend to fill every field. */}
