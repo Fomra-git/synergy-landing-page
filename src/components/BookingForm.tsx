@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { branches, countryCodes, flagUrl, painAreas, PHONE_DISPLAY, PHONE_TEL } from "@/lib/data";
+import { useRouter } from "next/navigation";
+import { branches, countryCodes, flagUrl, painAreas } from "@/lib/data";
+import { useBookingModal } from "@/context/BookingModalContext";
 import { IconChevronDown } from "./icons";
 
 const inputClasses =
@@ -100,7 +102,8 @@ function Select({
 }
 
 export default function BookingForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const router = useRouter();
+  const { close } = useBookingModal();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [name, setName] = useState("");
@@ -145,40 +148,13 @@ export default function BookingForm() {
         return;
       }
 
-      setSubmitted(true);
-      form.reset();
-      setCountryCode("+91");
-      setPhone("");
+      close();
+      router.push(`/thankyou?name=${encodeURIComponent(name.trim())}`);
     } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {
       setSubmitting(false);
     }
-  }
-
-  if (submitted) {
-    return (
-      <div className="rounded-[20px] border border-line bg-white p-8 text-center shadow-lifted">
-        <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-accent/10 text-2xl">
-          ✅
-        </div>
-        <h3 className="text-lg text-navy">Thank you, {name.split(" ")[0] || "there"}!</h3>
-        <p className="mt-1 text-sm text-ink-soft">
-          Our team will call you shortly to confirm your appointment. For any queries, call us at{" "}
-          <a href={`tel:${PHONE_TEL}`} className="font-semibold text-accent hover:text-accent-dark">
-            {PHONE_DISPLAY}
-          </a>
-          .
-        </p>
-        <button
-          type="button"
-          onClick={() => setSubmitted(false)}
-          className="mt-4 text-sm font-semibold text-accent hover:text-accent-dark"
-        >
-          Book another slot
-        </button>
-      </div>
-    );
   }
 
   return (
