@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -17,22 +18,9 @@ export default async function ThankYouPage({
   const firstName = name?.trim().split(" ")[0] || "there";
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#f1f7ff]">
-      <header className="border-b border-line bg-white/95 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="inline-block">
-          <Image
-            src="/images/logo.png"
-            alt="Synergy Healthcare & Wellness"
-            width={168}
-            height={64}
-            className="h-12 sm:h-14"
-            style={{ width: "auto" }}
-            priority
-          />
-        </Link>
-      </header>
-
-      <main className="flex flex-1 items-center justify-center px-4 py-12">
+    <>
+      <Header />
+      <main className="flex min-h-[60vh] items-center justify-center bg-[#f1f7ff] px-4 py-12">
         <div className="w-full max-w-[440px] rounded-[20px] border border-line bg-white p-8 text-center shadow-lifted">
           <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-accent/10 text-2xl">
             ✅
@@ -50,6 +38,7 @@ export default async function ThankYouPage({
           </Link>
         </div>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
