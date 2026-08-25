@@ -1,6 +1,7 @@
 import { after } from "next/server";
 import { evaluateSubmission, isRateLimited, type BookingSubmission } from "@/lib/spam";
 import { createZohoLead } from "@/lib/zoho";
+import { sendBookingWebhooks } from "@/lib/webhook";
 
 export async function POST(request: Request) {
   let body: Partial<BookingSubmission>;
@@ -66,6 +67,8 @@ export async function POST(request: Request) {
     } catch (err) {
       console.error("[booking] failed to create Zoho lead", err);
     }
+
+    await sendBookingWebhooks(submission);
   });
 
   return Response.json({ ok: true });
